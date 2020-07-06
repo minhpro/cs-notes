@@ -14,6 +14,12 @@ Bình thường dòng điện sẽ không thể đi qua được transistor, E v
 
 MOSFET - Metal Oxide Semiconductor Field Effect Transistor là một loại transistor sử dụng voltage để điều khiển (giảm điện trở và cho phép dòng điện chạy qua 2 cực) dòng điện chạy qua nó thay vì sử dụng một dòng điện khác như transistor thông thường (NPN, hay PNP, Base Emitter and Collector). Cũng do vậy MOSFET được coi là voltage-controlled switch.
 
+![mosfet][img/MOSFET.png]
+
+Một MOSFET hoạt động như một voltage-controlled switch, trong đó gate voltage tạo ra một trường điện, trường điện này sẽ turn ON hay OFF dòng điện kết nối source và drain. Từ khoá field effect từ đó mà ra.
+
+Chúng ta sẽ tìm hiểu hoạt động của nMOS. Thông thường substrate của nMOS sẽ nối với GND - điện áp (voltage) thấp nhất của hệ thống. Khi voltage ở gate là 0V, dòng điện sẽ không thể đi qua source và drain (no path) do diodes giữa source và drain với substract là reverse biased. Khi áp một điện áp dương vào top plate của gate, lúc này 2 plate của gate đóng vai trò như tụ điện, nó sinh ra một trường điện hấp dẫn điện tích dương ở top plate và điện tích âm ở bottom plate
+
 ## CMOS
 
 CMOS - Complementary Metal-Oxide-Semiconductor used to product logic gates. 

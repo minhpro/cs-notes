@@ -56,16 +56,35 @@ pull-up network gồm 2 pMOS nối theo kiểu song song, còn pull-down network
 | 0  | 0  | OFF               | ON              | 1  |
 | 0  | 1  | OFF               | ON              | 1  |
 | 1  | 0  | OFF               | ON              | 1  |
-| 1  | 1  | ON                | OFF             | 1  |
+| 1  | 1  | ON                | OFF             | 0  |
 
 * 1: High voltage
 * 0: Low voltage
 
-Phần trên mô tả 2-input NAND gate, tổng quát hoá chúng ta có thể xây dựng n-input NAND gate hay gọi là inverting logic gate như sau:
+Với NOR gate, chúng ta cần có bảng hoạt động như sau:
+
+| A  | B  | Pull-down network | Pull-up network | Y  |
+|----|:---|:------------------|:----------------|:---|
+| 0  | 0  | OFF               | ON              | 1  |
+| 0  | 1  | ON                | OFF             | 0  |
+| 1  | 0  | ON                | OFF             | 0  |
+| 1  | 1  | ON                | OFF             | 0  |
+
+Như vậy Pull-down network sẽ là các nMOS ghép song song, còn Pull-up network sẽ là các pMOS ghép nối tiếp.
+
+![cmos_nor](img/cmos_nor.png)
+
+Phần trên mô tả 2-input NAND gate và NOR gate, tổng quát hoá chúng ta có thể xây dựng n-input inverting logic gate với quy luật là khi một network là ON và mạng còn lại là OFF tại bất ký thời điểm nào - the rule of conduction complements. Khi nMOSs nối tiếp thì mMOSs song song và ngược lại.
 
 ![inverting_logic_gate](img/inverting_logic_gate.png)
 
-Từ NOT và NAND gate, chúng ta có thể xây dựng các mạch logic phức tạp hơn. Chúng ta sẽ tìm hiểu thêm trong bài viết về Logic gate.
+Các mạch logic cơ bản đã trình bày được ký hiệu trong **logic gate** như sau:
+
+![basic_gates](img/basic_gates.png)
+
+Từ NOT, NAND gate, và NOR gate chúng ta có thể xây dựng các mạch logic phức tạp hơn. Ví dụ AND gate không thể được xây dựng trực tiếp từ CMOS đơn mà bằng cách ghép NAND và NOT gate lại. Chúng ta sẽ tìm hiểu thêm cách xây dựng mạch logic trong bài viết về Logic gate.
+
+![AND_Gate](img/AND_Gate.png)
 
 ## Reference
 

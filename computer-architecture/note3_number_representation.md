@@ -27,20 +27,19 @@ Dùng N chữ số thì có thể biểu diễn được 2^N số nhị phân c�
 
 Cách chuyển đổi từ số thập phân sang số nhị phân như sau:
 
-Khởi tạo: stack = []
+Khởi tạo: stack = [], số cần chuyển đổi là n
 
-Nếu n = 0 thì pop hết các chữ số trong stack và xếp từ trái qua phải ta thu được kết quả. Nếu không thì chia n cho 2 được m và dư k (k = 0 or 1), push k vào stack. Gán n = m và thực hiện lặp lại. 
+Chia n cho 2 được m và dư k, push k vào stack. Nếu m = 0 thì pop hết các chữ số trong stack và xếp từ trái qua phải ta thu được kết quả. Ngược lại thì gán n = m và thực hiện lặp lại. 
 
 Ví dụ chuyển đổi 83 (base 10) sang số nhị phân sẽ qua các bước như sau:
 
-- stack = [], n = 83, m = 41, k = 1
-- stack = [1], n = 41, m = 20, k = 1
-- stack = [1, 1], n = 20, m = 10, k = 0
-- stack = [0, 1, 1], n = 10, m = 5, k = 0
-- stack = [0, 0, 1, 1], n = 5, m = 2, k = 1
-- stack = [1, 0, 0, 1, 1], n = 2, m = 1, k = 0
-- stack = [0, 1, 0, 0, 1, 1], n = 1, m = 0, k = 1
-- stack = [1, 0, 1, 0, 0, 1, 1], n = 0 -> kết quả là 1010011
+- n = 83, m = 41, k = 1, stack = [1]
+- n = 41, m = 20, k = 1, stack = [1, 1]
+- n = 20, m = 10, k = 0, stack = [0, 1, 1]
+- n = 10, m = 5, k = 0, stack = [0, 0, 1, 1]
+- n = 5, m = 2, k = 1, stack = [1, 0, 0, 1, 1]
+- n = 2, m = 1, k = 0, stack = [0, 1, 0, 0, 1, 1]
+- n = 1, m = 0, k = 1, stack = [1, 0, 1, 0, 0, 1, 1], m = 0 -> kết quả là 1010011
 
 83(base 10) -> 1010011(base 2)
 
@@ -63,10 +62,9 @@ Cách chuyển từ số thập phân sang số hexa tương tự như từ số
 
 Ví dụ chuyển 2869 sang hệ hexa
 
-- stack = [], n = 2837, m = 154, k = 5
-- stack = [5], n = 154, m = 9, k = 10
-- stack = [A, 5], n = 9, m = 0, k = 9
-- stack = [9, A, 5], n = 0 -> 9A5
+- n = 2837, m = 154, k = 5, stack = [5]
+- n = 154, m = 9, k = 10, stack = [A, 5]
+- n = 9, m = 0, k = 9, stack = [9, A, 5], m = 0 -> kết quả là 9A5
 
 2869(base 10) -> 0x9A5(hexa)
 
@@ -81,4 +79,27 @@ Ví dụ 10100111101 sang hexa
 Việc chuyển từ hexa sang binary thì chỉ cần biểu diễn từng chữ số trong số hex dưới dạng nhóm 4 bits là được số nhị phân.
 
 0x2E3F -> 0010 1110 0011 1111 -> 0010111000111111
+
+## Cộng số nhị phân
+
+Khi cộng hai số thập phân, chúng ta gióng 2 số từng phải qua trái, rồi thực hiện cộng các chữ số trên cùng cột cũng theo thứ tự từ phải qua trái (hàng đơn vị cộng hàng đơn vị, hàng chục cộng hàng chục, ...). Trong khi thực hiện như vậy, nếu tổng của hai chữ số vượt quá 1 chữ số thì giữ lại chữ số đầu và ghi nhớ chữ số thứ 2 cho cột tiếp theo. Việc cộng hai số nhị phân cũng được thực hiện tương tự, khi 1 + 1 = 10, chúng ta giữ lại bit 0 và ghi nhớ bit 1 cho cột tiếp theo. Bit được ghi nhớ gọi là bit nhớ hay carry bit.
+
+![sum_of_numbers](img/sum_of_numbers.png)
+
+Các hệ thống số (digital systems) thường hoạt động với hệ cố định số lượng các chữ số. Ví dụ một hệ cố định với 8 bits, nghĩa là nó hoạt động với các con số sinh ra từ 8 bits. Việc cộng gọi là *overflow* nếu kết quả vượt quá số chữ số cho phép. Một hệ 8 bits có khoảng giá trị là [0, 255]. Nếu cộng các số 8 bits có kết quả vượt quá 255 thì được gọi là *overflow*, bit thứ 9 bị bỏ qua và sinh ra kết quả không đúng.
+
+![overflow_addition](img/overflow_addition.png)
+
+## Biểu diễn số có dấu
+
+Biểu diễn số có dấu (âm và dương) bằng mã nhị phân? Chúng ta có một số cách như sau.
+
+**Sign/Magnitude Numbers**
+
+Sử dụng bit giá trị nhất (the most significant bit, left most bit) làm bit đánh dấu gọi là sign bit, các bit còn lại tính làm giá trị. Sign bit 0 đánh dấu đây là số dương, còn bit 1 đánh dấu đây là số âm. Với cách biểu diễn này thì N bits sẽ biểu diễn được khoảng giá trị [-(2^(N-1) - 1), 0] và [0, 2^(N-1)].
+
+Ví dụ 5 và -5 được biểu diễn bằng số 4 bits như sau: 0101 và 1101 cùng tồn tại, như vậy cùng một số lại có 2 biểu diễn. Và phép cộng cũng không thực hiện được.
+
+**Two's Complement Number (số bù)**
+
 

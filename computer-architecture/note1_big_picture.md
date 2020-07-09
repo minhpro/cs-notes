@@ -28,7 +28,7 @@ Mô hình phần cứng của các máy tính là giống nhau, tuy nhiên mỗi
 
 Ví dụ một đoạn mã code C được dịch sang mã máy
 
-![c_to_machine_code](img/c_to_machine_code.png)
+<img src="img/c_to_machine_code.png" alt="c to machine code" width="500" height="700" />
 
 ## Computer Organization
 

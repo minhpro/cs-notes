@@ -86,9 +86,17 @@ Khi cộng hai số thập phân, chúng ta gióng 2 số từng phải qua trá
 
 ![sum_of_numbers](img/sum_of_numbers.png)
 
-Các hệ thống số (digital systems) thường hoạt động với hệ cố định số lượng các chữ số. Ví dụ một hệ cố định với 8 bits, nghĩa là nó hoạt động với các con số sinh ra từ 8 bits. Việc cộng gọi là *overflow* nếu kết quả vượt quá số chữ số cho phép. Một hệ 8 bits có khoảng giá trị là [0, 255]. Nếu cộng các số 8 bits có kết quả vượt quá 255 thì được gọi là *overflow*, bit thứ 9 bị bỏ qua và sinh ra kết quả không đúng.
+Các hệ thống số (digital systems) thường hoạt động với hệ cố định số lượng các chữ số. Ví dụ một hệ cố định với 4 bits, nghĩa là nó hoạt động với các con số sinh ra từ 4 bits. Việc cộng gọi là *overflow* nếu kết quả vượt quá số chữ số cho phép. Một hệ 4 bits có khoảng giá trị là [0, 15]. Nếu cộng các số 8 bits có kết quả vượt quá 15 thì được gọi là *overflow - tràn số*, bit thứ 5 bị bỏ qua và sinh ra kết quả không đúng.
 
-![overflow_addition](img/overflow_addition.png)
+![addition overflow](img/addition_overflow.png)
+
+Như ví dụ trên chúng ta thấy 1011 + 1001 = 0100 nghĩa là 11 + 9 = 4. Kết quả sai do overflow.
+
+Khi thiết kế chương trình máy tính, nếu không để ý đến lỗi overflow thì hậu quả để lại có thể vô cùng nghiêm trọng.
+
+![Ariane 5 rocket](img/ariane_5_rocket.jpeg)
+
+Tên lửa 7 triệu đô Ariane 5 được phóng lên không trung tháng 04 năm 1996, và nổ tung sau 40 giây. Nguyên nhân là do máy tính điều khiển tên lửa đã bị tràn số ngoài khoảng 16-bit của nó và crashed. Mã nguồn đã được kiểm thử chặt chẵn ở bản Ariane 4. Nhưng bản Ariane 5 có động cơ nhanh hơn, nó sinh ra giá trị lớn hơn cho máy tính điều khiển, và điều này dẫn đến overflow.
 
 ## Biểu diễn số có dấu
 
@@ -96,10 +104,55 @@ Biểu diễn số có dấu (âm và dương) bằng mã nhị phân? Chúng ta
 
 **Sign/Magnitude Numbers**
 
-Sử dụng bit giá trị nhất (the most significant bit, left most bit) làm bit đánh dấu gọi là sign bit, các bit còn lại tính làm giá trị. Sign bit 0 đánh dấu đây là số dương, còn bit 1 đánh dấu đây là số âm. Với cách biểu diễn này thì N bits sẽ biểu diễn được khoảng giá trị [-(2^(N-1) - 1), 0] và [0, 2^(N-1)].
+Sử dụng bit giá trị nhất (the most significant bit, left most bit - MSB) làm bit đánh dấu gọi là sign bit, các bit còn lại tính làm giá trị. Sign bit 0 đánh dấu đây là số dương, còn bit 1 đánh dấu đây là số âm. Với cách biểu diễn này thì N bits sẽ biểu diễn được khoảng giá trị [-(2^(N-1) - 1), 0] và [0, 2^(N-1)].
 
 Ví dụ 5 và -5 được biểu diễn bằng số 4 bits như sau: 0101 và 1101 cùng tồn tại, như vậy cùng một số lại có 2 biểu diễn. Và phép cộng cũng không thực hiện được.
 
 **Two's Complement Number (số bù)**
 
+Số bù cũng sử dụng MSB làm bit dấu, với số N-bit có bit dấu là:
 
+* 0: biểu diễn số 0 và số dương có giá trị như số không dấu, khoảng biểu diễn là [0, 2^(N-1) - 1]
+* 1: biểu diễn số âm, khoảng biểu diễn là [-2^(N-1), -1]
+
+Để suy từ số không dấu (số dương) sang số âm chúng ta sẽ đi từ điều kiện của phép cộng.
+
+Giả xử a là một số không dấu N-bit, b = -a, khi đó a + b = 0 (giá trị 0 được biểu diễn như hình vẽ)
+
+![two complement number](img/two_complement_number.png)
+
+Như hình vẽ ta thấy a + (b-1) = 1...1, đo đó chỉ cần đảo các bit của a thì được b-1. Chúng ta có cách tìm ra biểu diễn số có dấu như sau:
+* Viết ra số không dấu tương ứng
+* Đảo tất cả các bit của số không dấu (số bù 1)
+* Thực hiện cộng 1 với số đã đảo dấu ta thu được số có dấu cần tìm (số bù 2)
+
+Cái tên two's complement number cũng từ đó mà sinh ra.
+
+Ví dụ biểu diễn -5 bằng số 4-bit
+
+* Số không dấu tương ứng là 5: 0101
+* Đảo bit thu được: 1010
+* Cộng 1 được: 1011 (-5)
+
+Từ một biểu diễn nhị phân của số có dấu, chúng ta có thể dễ dàng tìm ra giá trị của nó không?
+
+Quay lại hình vẽ bên trên, ta có các nhận xét sau:
+
+* cn luôn luôn = 1
+* (an-1...a1) + (cn-1...c1) = 1...1 (N-1 bits 1)
+
+(cn-1...c1) = 2^(N-1) - (an-1...a1) = 2^(N-1) - a
+
+Giả sử cn đại diện cho giá trị M ta có
+
+b - 1 = (cncn-1...c1)
+      = M + (cn-1...c1)
+      = M + (2^(N-1) - a)
+
+M = - 2^(N-1) + a + b -1 = - 2^(N-1)
+
+Vậy để tính giá trị của số có dấu = - 2^(N-1) + giá trị không dấu do N-1 bit còn lại biểu diễn. Ví dụ số có dấu 4-bit: 1101 = - 2^3 + (101) = -8 + 5 = -3
+
+**Note** 
+
+Phần chứng minh biểu diễn này thoả mãn các phép toán số học (thực tế chỉ cần chứng minh với phép cộng) được nhường cho bạn đọc.

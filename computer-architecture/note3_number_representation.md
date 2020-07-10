@@ -108,7 +108,7 @@ Sử dụng bit giá trị nhất (the most significant bit, left most bit - MSB
 
 Ví dụ 5 và -5 được biểu diễn bằng số 4 bits như sau: 0101 và 1101 cùng tồn tại, như vậy cùng một số lại có 2 biểu diễn. Và phép cộng cũng không thực hiện được.
 
-**Two's Complement Number (số bù)**
+**Two's Complement Number (số bù 2)**
 
 Số bù cũng sử dụng MSB làm bit dấu, với số N-bit có bit dấu là:
 
@@ -153,6 +153,39 @@ M = - 2^(N-1) + a + b -1 = - 2^(N-1)
 
 Vậy để tính giá trị của số có dấu = - 2^(N-1) + giá trị không dấu do N-1 bit còn lại biểu diễn. Ví dụ số có dấu 4-bit: 1101 = - 2^3 + (101) = -8 + 5 = -3
 
+**Phép trừ số có dấu**
+
+Để thực hiện a - b, ta thực hiện a + số bù 2 của b. 
+
+Ví dụ 1001 - 1011
+
+* Số bù 2 của 1011 là 0100 + 1 = 0101
+* 1001 - 1011 = 1001 + 0101 = 1110 = -2 (base 10)
+
 **Note** 
 
-Phần chứng minh biểu diễn này thoả mãn các phép toán số học (thực tế chỉ cần chứng minh với phép cộng) được nhường cho bạn đọc.
+Phần chứng minh biểu diễn two's complement number thoả mãn các phép toán số học (thực tế chỉ cần chứng minh với phép cộng) được nhường cho bạn đọc.
+
+## Bài tập
+
+Sau đây là một số bài tập to nhỏ vừa vừa để chúng ta thử sức.
+
+**Bài 1** Chuyển các số sau từ hệ thập phân sang hệ nhị phân và hệ hexa
+
+* a, 249
+* b, 1091
+
+**Bài 2** Biểu diễn các số sau dưới dạng số nhị phân có dấu 8-bit
+
+* a, 59
+* b, -45
+* c, -90
+
+**Bài 3** Viết một chương bằng ngôn ngữ yêu thích (C, C++, Java, Python,...) để chuyển đổi số thập phân sang số nhị phân.
+
+**Bài 4** Chuyển các số có dấu (số bù 2) 4-bit sang 8-bit
+
+* a, 0101
+* b, 1001
+
+**Bài 5** Chúng ta đã biết cách trừ hai số nhị phân có dấu (số bù 2). Vậy còn cách trừ hai số nhị phân không dấu thì sao?

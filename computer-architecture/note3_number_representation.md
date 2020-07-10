@@ -62,11 +62,11 @@ Cách chuyển từ số thập phân sang số hexa tương tự như từ số
 
 Ví dụ chuyển 2869 sang hệ hexa
 
-- n = 2837, m = 154, k = 5, stack = [5]
-- n = 154, m = 9, k = 10, stack = [A, 5]
-- n = 9, m = 0, k = 9, stack = [9, A, 5], m = 0 -> kết quả là 9A5
+- n = 2869, m = 179, k = 5, stack = [5]
+- n = 179, m = 11, k = 3, stack = [3, 5]
+- n = 11, m = 0, k = 11, stack = [B, 3, 5], m = 0 -> kết quả là B35
 
-2869(base 10) -> 0x9A5(hexa)
+2869(base 10) -> 0xB35(hexa)
 
 **Binary to Hexa**
 

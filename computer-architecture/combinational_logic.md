@@ -63,7 +63,7 @@ Y = !C.!A.B + !C.A.B + C.A.!B + C.A.B
 **Cách hình thành biểu thức logic**
 
 * Viết ra bảng chân giá trị
-* Biểu thức logic tương đương là tổng các trường hợp trong truth table có output = 1.
+* Biểu thức logic tương đương là tổng các trường hợp trong truth table có output = 1 (sum of products).
 * Xây dụng mạch logic từ biểu thức logic (tìm hiểu trong phần sau)
 
 Việc xây dựng mạch logic tuân theo các luật logic, cụ thể là đại số Boolean (Boolean Algebra). Qua đó chúng ta có thể chuyển từ biểu thức logic này sang biểu thức logic tương đương khác đơn giản và dễ xây dựng hơn.
@@ -99,7 +99,6 @@ Y = !C.!A.B + !C.A.B + C.A.!B + C.A.B
   = !C.B(!A+ A) + C.A(!B+B)
   = !CB + CA
 ```
-
 
 ## Reference
 

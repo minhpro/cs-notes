@@ -1,6 +1,6 @@
-1. Write an efficient function to find the first nonrepeated character in a string. For instance, the first nonrepeated character in “total” is 'o' and the first nonrepeated character in “teeter” is 'r'. How efficiency is your algorithms?
+**E1**. Write an efficient function to find the first nonrepeated character in a string. For instance, the first nonrepeated character in “total” is 'o' and the first nonrepeated character in “teeter” is 'r'. How efficiency is your algorithms?
 
-2. Assume you have the class hierarchy such as:
+**E2**. Assume you have the class hierarchy such as:
 
 B extends A; C extends B; D extends A
 
@@ -10,7 +10,7 @@ void f(B x);
 
 Which classes of objects can you pass to the function?
 
-3. Given:
+**E3**. Given:
 
 ```
 class Top {
@@ -27,13 +27,14 @@ public class Bottom2 extends Top {
 ```
 
 What is the result?
-A. BD
-B. DB
-C. BDC
-D. DBC
-E. Compilation fails
 
-4. Given:
+* A. BD
+* B. DB
+* C. BDC
+* D. DBC
+* E. Compilation fails
+
+**E4**. Given:
 
 ```
 public class Mirror {
@@ -54,14 +55,15 @@ public class Mirror {
 ```
 
 What is the result?
-A. 7 10
-B. 8 10
-C. 7 12
-D. 8 12
-E. Compilation fails
-F. An exception is thrown at runtime
 
-5. given
+* A. 7 10
+* B. 8 10
+* C. 7 12
+* D. 8 12
+* E. Compilation fails
+* F. An exception is thrown at runtime
+
+**E5**. Given
 
 ```
 public class McGee {
@@ -80,15 +82,16 @@ public class McGee {
 ```
 
 What is the result?
-A. same old
-B. newly new
-C. Compilation fails due to multiple errors
-D. Compilation fails due only to an error on line 7
-E. Compilation fails due only to an error on line 8
-F. Compilation fails due only to an error on line 11
-G. Compilation fails due only to an error on line 13
 
-6. Given:
+* A. same old
+* B. newly new
+* C. Compilation fails due to multiple errors
+* D. Compilation fails due only to an error on line 7
+* E. Compilation fails due only to an error on line 8
+* F. Compilation fails due only to an error on line 11
+* G. Compilation fails due only to an error on line 13
+
+**E6**. Given:
 
 ```
 import java.util.*;
@@ -105,15 +108,16 @@ public class Sequence {
 ```
 
 What is the result?
-A. [apple, banana, carrot, plum]
-B. [apple, plum, carrot, banana]
-C. [apple, plum, banana, carrot]
-D. [plum, banana, carrot, apple]
-E. [plum, apple, carrot, banana]
-F. [banana, plum, carrot, apple]
-G. Compilation fails
 
-6. Given:
+* A. [apple, banana, carrot, plum]
+* B. [apple, plum, carrot, banana]
+* C. [apple, plum, banana, carrot]
+* D. [plum, banana, carrot, apple]
+* E. [plum, apple, carrot, banana]
+* F. [banana, plum, carrot, apple]
+* G. Compilation fails
+
+**E7**. Given:
 
 ```
 public class OverAndOver {
@@ -134,7 +138,24 @@ public class OverAndOver {
 ```
 
 What is the result?
-A. 12
-B. 13
-C. 123
-D. 1234
+
+* A. 12
+* B. 13
+* C. 123
+* D. 1234
+
+**E8**. Write an efficient algorithm to reverse all words in a string. Assume that words in the string are space delimiter-seperated. For example if input is "Today is the great day" then output should be "day great the is Today".
+
+**E9**. Given a database as below:
+
+* Supplier(name, address) // name is the primary key
+* Product(title, price, year, sname) // tile is the primary key and sname is a foreign key references to Supplier's name
+* Order(product, quantity, delivered) //product is a foreign key references to Product.title
+
+a. Write a SQL query to select all Product with price > 1000 and show they Supplier's name.
+
+b. Write a SQL script to update delivered = true for all Order with product = "Iphone XS Max"
+
+c. Write a SQL query to show total number of products has ordered for each Supplier.
+
+**E10**. There is a group of students: three male and four female. The students go to visit Ho Chi Minh temple and they have to stand in a line. How many ways do they stand such as no male standing next to other male?

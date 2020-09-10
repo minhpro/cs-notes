@@ -1,5 +1,5 @@
-# cs-notes
+**Convert markdown to pdf**
 
-Take some notes about computer science.
+Using pandoc
 
-* [Computer Architecture](computer-architecture/README.md)
+`pandoc document.md -s -o document.pdf`

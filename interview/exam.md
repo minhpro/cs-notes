@@ -162,4 +162,4 @@ b. Write a SQL script to update delivered = true for all Order with product = "I
 
 c. Write a SQL query to show total number of products has ordered for each Supplier.
 
-**E10**. There is a group of students: three male and four female. The students go to visit Ho Chi Minh temple and they have to stand in a line. How many ways do they stand such as no male standing next to other male?
+**E10**. There is a group of students: three males and four females. The students go to visit the Ho Chi Minh temple and they have to stand in a line. How many ways do they stand such as no male standing next to other male?

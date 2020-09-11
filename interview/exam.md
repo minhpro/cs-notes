@@ -143,6 +143,10 @@ What is the result?
 * B. 13
 * C. 123
 * D. 1234
+* E. Compilation fails
+* F. 123 followed by an exception
+* G. 1234 followed by an exception
+* H. An exception is thrown with no other output
 
 **E8**. Write an efficient algorithm to reverse all words in a string. Assume that words in the string are space delimiter-seperated. For example if input is "Today is the great day" then output should be "day great the is Today".
 

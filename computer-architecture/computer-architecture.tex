@@ -7,6 +7,17 @@
 \usecolortheme{default}
 
 
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\urlstyle{same}
+
+
 %------------------------------------------------
 %Information to be included in the title page:
 \title{Computer Architecture}
@@ -14,7 +25,7 @@
 \subtitle{What computer contains and how it works}
 
 \author{Nguyen The Minh}
-\institute{Electronics and Computer Science Institute}
+\institute{Electronics and Computer Science Home}
 \date{Computing Conference, Oct 2050}
 
 %\logo{\includegraphics[height=1.5cm]{atom.png}}
@@ -51,8 +62,8 @@
 \section{Computer History}
 \begin{frame}
 \frametitle{Pre-20th Century}
-\begin{columns}
 
+\begin{columns}
 \column{0.5\textwidth}
 \begin{figure}[h!]
   \includegraphics[height=2.5cm]{img/abacus.jpeg}
@@ -64,26 +75,88 @@
     \caption{1833, Analytical Engine, London Museum}
 \end{figure}
 \end{columns}
+
 \end{frame}
 
-\section{Digital Computer}
+\begin{frame}
+\frametitle{Advent of Digital Computer}
+
+\textbf{Kurt Gödel's} 1931, \textit{Incompleteness Theorem}: universal arithmetic-based formal language \pause
+
+\textbf{Alan Turing} 1936, \textit{On Computable Numbers}:  formal and simple hypothetical devices - Turing Machine  \pause
+
+\textbf{Von Neumann} 1947, \textit{Von Neumann Architecture}: stored-program computers \pause
+
+\textbf{Manchester Baby} 1948, \textit{First stored-program computer} 
+
+\end{frame}
 
 \begin{frame}
 \frametitle{First digital computer}
+
+\begin{columns}
+\column{0.5\textwidth}
 \begin{figure}[h!]
   \includegraphics[height=2.5cm]{img/ENIAC.jpg}
-    \caption{ENIAC - first electronic programmable computer - 1945}
+    \caption{ENIAC - first electronic computer - 1945}
+\end{figure}
+\column{0.5\textwidth}
+\begin{figure}[h!]
+  \includegraphics[height=2.5cm]{img/manchester_baby.jpg}
+    \caption{Manchester Baby, 1948}
+\end{figure}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Simiconductor Industry}
+
+\begin{figure}[h!]
+  \includegraphics[height=4cm]{img/computer_architecture-simiconductor.png}
+    \caption{Silicon Valley}
+\end{figure}
+
+Transistor, CMOS, IC
+
+ RAM, ROM
+
+LSIC, Microprocessor,
+
+\href{https://en.wikipedia.org/wiki/History_of_computing_hardware_(1960s\%E2\%80\%93present)}{Wikipedia - Computer Hardware History}
+ 
+\end{frame}
+
+\section{Computer Organization}
+
+\begin{frame}
+\frametitle{Modern Digital Computer}
+\begin{figure}[h!]
+  \includegraphics[height=4cm]{img/computer_organization.png}
+    \caption{Modern computer organization}
 \end{figure}
 \end{frame}
 
 \begin{frame}
-\frametitle{Modern Digital Computer}
-\begin{itemize}
-    \item<1-> Text visible on slide 1
-    \item<2-> Text visible on slide 2
-    \item<3> Text visible on slides 3
-    \item<4-> Text visible on slide 4
-\end{itemize}
+\frametitle{Building Material}
+\begin{figure}[h!]
+  \includegraphics[height=4cm]{img/digital_abstraction.png}
+    \caption{Digital Abstraction Layers}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Logic Circuits}
+\begin{columns}
+\column{0.25\textwidth}
+\begin{figure}[h!]
+  \includegraphics[height=2cm]{img/CMOS_inverter.png}
+\end{figure}
+\column{0.75\textwidth}
+\begin{figure}[h!]
+  \includegraphics[height=2cm]{img/basic_gates.png}
+\end{figure}
+\end{columns}
 \end{frame}
 
 %---------------------------------------------------------

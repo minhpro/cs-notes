@@ -113,3 +113,11 @@ Order(pname, quantity) - pname là khoá ngoài liên kết tới Product.name
 7. Trong java package được dùng để làm gì?
 
 > Dùng để module hoá chương trình, để từ đó dễ dàng quản lý và phát triển.
+
+8. Hàm hashCode() trả về giá trị gì? Tại sao khi override hàm equal() thì nhất thiết bạn phải override hashCode()?
+
+> he value returned by hashCode() is the object's hash code, which is the object's memory address in hexadecimal.
+
+> By definition, if two objects are equal, their hash code must also be equal, which will prevent your class from functioning properly in conjunction with all hash-based collections, including HashMap, HashSet, and Hashtable. If you override the equals() method, you change the way two objects are equated and Object's implementation of hashCode() is no longer valid. Therefore, if you override the equals() method, you must also override the hashCode() method as well.
+
+9. 

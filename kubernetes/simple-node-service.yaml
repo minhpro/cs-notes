@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-node-app
+spec:
+  selector:
+    matchLabels:
+      run: simple-node-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: simple-node-app
+    spec:
+      containers:
+        - name: simple-node-app
+          image: simple-node-app
+          ports:
+            - containerPort: 9090
+              protocol: TCP

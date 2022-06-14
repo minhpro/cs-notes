@@ -14,4 +14,22 @@
 
 8. Khi nào thì Throw Exception (propagate), khi nào thì nên handle nó?
 
-9. 
+9. Remove các bản ghi duplicate trong bảng SQL
+
+
+```
+delete from role_ip_addresses
+where 
+id NOT IN 
+(select  id from (SELECT 
+MIN(id) as id
+from 
+role_ip_addresses 
+group by role_id, ip_address) t);
+```
+
+Bọc thêm select bên ngoài để tránh bị lỗi
+
+```
+You can't specify target table 'role_ip_addresses' for update in FROM clause
+```

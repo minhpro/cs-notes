@@ -1,0 +1,6 @@
+- name: install zookeeper
+  hosts: zookeeper-nodes
+  become: yes
+  remote_user: spiral
+  roles:
+    - ansible-zookeeper

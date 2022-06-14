@@ -28,7 +28,7 @@ Thì chỉ cần thêm biến môi trường, chẳng hạn thêm vào file `doc
 
 ```
 environment:
-    JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*5005"
+    JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
     ...
 ports:
     - 6005:5005

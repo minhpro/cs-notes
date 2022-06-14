@@ -74,9 +74,9 @@ What is the result?
 
 **E6**. Given a database as below:
 
-* Supplier(name, address) // name is the primary key
-* Product(title, price, year, sname) // tile is the primary key and sname is a foreign key references to Supplier's name
-* Order(product, quantity, delivered) //product is a foreign key references to Product.title
+* Supplier(sid*, name, address) 
+* Product(pid*, title, price, year, sid**) 
+* Order(pid**, quantity, delivered)
 
 a. Write a SQL query to select all Product with price > 1000 and show they Supplier's name.
 

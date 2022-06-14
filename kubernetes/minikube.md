@@ -8,3 +8,4 @@ So to use an image without uploading it, you can follow these steps:
 4. Set the imagePullPolicy to Never, otherwise Kubernetes will try to download the image.
 
 Important note: You have to run eval $(minikube docker-env) on each terminal you want to use, since it only sets the environment variables for the current shell session.
+

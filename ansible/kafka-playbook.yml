@@ -1,0 +1,6 @@
+- name: install kafka
+  hosts: kafka
+  become: yes
+  remote_user: spiral
+  roles:
+    - kafka

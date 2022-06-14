@@ -6,6 +6,16 @@
 
 3. Each time, there is a generated number inserted to a sorted array (can be expanded), how to keep track the median.
 
+4. Array vs Linked List
+
+5. Stack is? How implement?
+
+6. Binary Tree? How to check it is BST ?
+
+7. Thiết kế một enum cho các ngày trong tuần và viết hàm đầu vào là enum này với kết quả đầu ra là thứ chẵn hay thứ lẻ
+
+Example; MON -> chẵn, TUE -> lẻ
+
 ## Java
 
 1. Different between Exception and Error
@@ -27,22 +37,32 @@
 
 2. Bạn có 20 chai dung dịch H2SO4. Trong đó có 19 chai nặng 500g, nhưng một chai thì nặng 505g. Với một cái cân thăng bằng, bạn sẽ tìm ra chai dung dịch nặng hơn bằng cách nào?
 
-3. Em Bông rất thích nghịch cửa. Ở hội trường có 20 cái cửa được đánh số từ 1 đến 20. Lần đầu, em mở hết chúng ra. Lần thứ 2, em đóng tất cả các cửa có số chia hết cho 2. Lần 3, em lật (đóng thì mở mà mở thì đóng) hết các cửa có số chia hết cho 3. Cứ như thế sau 20 lần. Sau lần thứ 20, khi này em Bông lật cửa có số 20, thì có bao nhiêu các cửa đang mở?
-
 4. How many ways are there to split a dozen people into 3 teams, where one team has 2 people, and the other two teams have 5 people each?
+
+5. Bạn An viết lên bảng 2021 số từ 1 đến 2021, sau đó An làm như sau: mỗi lần An xoá đi 2 số bất kỳ và viết một số mới bằng tổng hai số đã xoá. An làm như vậy đến khi trên bảng chỉ còn một số. Hỏi số đó là số nào?
+
+6. Nam tung súc sắc (6 mặt) 6 lần liên tiếp. Bạn hãy tính xem xác suất để một mặt nào đó xuất hiện nhiều hơn một lần.
 
 
 ## Database
 
-Courses: courseId*, courseName, teacherId
+Department: deptId*, deptName, building
 
-Teachers: teacherId*, teacherName
+Courses: courseId*, title, deptId**, credits
 
-Students: studentId*, studentName
+Teachers: teacherId*, teacherName, deptId**, salary
 
-StudentCourses: courseId*, studentId*
+Students: studentId*, studentName, deptId**, totalCredits
 
-1. Write a query to get a list of all students and how many courses each student is enrolled in.
+StudentCourses: courseId*, studentId*, semester, year
+
+1. Find the titles of courses in the `Computer. Science` department that have 3 credits.
+
+2. Find the highest salary of any instructor.
+
+3. Find all instructors earning the highest salary (there may be more than one with the same salary)
+
+3. Write a query to get a list of all students and how many credits each student is taked in semester `Spring` of year 2009.
 
 ## Design
 
@@ -63,3 +83,15 @@ Trang chủ sẽ chứa danh sách bài viết có phân trang, vào xem chi ti�
 * Nội dung
 * Số lượng like
 * Danh sách comment
+
+
+Query ra tất cả các tag kèm theo số lượng bài viết được gán cho từng tag
+
+Java 10
+Sql 20
+Mac 10
+....
+
+## Twitter
+
+Ứng dụng 

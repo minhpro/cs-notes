@@ -30,7 +30,7 @@ A play contains a ordered list of tasks. Each task calls an Ansible module
 
 
 
-Four distributed, re-usabl artifacts: variables, task files, playbooks, and roles
+Four distributed, re-usable artifacts: variables, task files, playbooks, and roles
 
 * A variables file contains only variables
 * A task file contains only tasks

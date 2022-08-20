@@ -288,3 +288,6 @@ TSWLatexianTemp*
 
 # Java class
 *.class
+
+# PDF files
+*.pdf

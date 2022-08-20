@@ -33,3 +33,15 @@ Bọc thêm select bên ngoài để tránh bị lỗi
 ```
 You can't specify target table 'role_ip_addresses' for update in FROM clause
 ```
+
+Bài toán
+
+Tính thời gian nghỉ phép:
+
+Giờ làm việc 8h -> 11h30 và 13h->17h30
+
+Đơn xin nghỉ gồm thông tin:
+    * from
+    * to
+
+Viết hàm tính ra số phút nghỉ phép từ đơn nghỉ phép

@@ -1,0 +1,21 @@
+base_domain: spiral-platform.net
+
+user_original_domains:
+  - {original_domain: lets.spiral.school, spiral_site_domain: spiralv2-hogehoge}
+  - {original_domain: form.mitsuichemicals.com, spiral_site_domain: mitsuichemicals-mci0001}
+  - {original_domain: form.khi.co.jp, spiral_site_domain: kawasaki-corporate}
+  - {original_domain: inquiry.corp.klab.com, spiral_site_domain: klab-corporation-klabsite}
+  - {original_domain: contact.kc-m.net, spiral_site_domain: kaneboform-inquiry}
+  - {original_domain: form.uxia.or.jp, spiral_site_domain: form-uxia-contact}
+  - {original_domain: www.arkray-eu-contact.com, spiral_site_domain: arkrayeu-contactform}
+  - {original_domain: www.contact.nsk.com, spiral_site_domain: nsk-crm-system-contact}
+  - {original_domain: inquiry.daifuku.com, spiral_site_domain: daifuku-account-inquiry}
+  - {original_domain: form.tokyo-vaction.jp, spiral_site_domain: tokyo-vaction-sponsorship}
+  - {original_domain: essay.mirror.asahi.com, spiral_site_domain: asahi-kagami-entry}
+  - {original_domain: wwwl56.mitsubishielectric.co.jp, spiral_site_domain: mitsubishi-me-cpokaiage}
+  - {original_domain: form.aoibokura.pocarisweat.jp, spiral_site_domain: pocari-account-aoibokura}
+  - {original_domain: www.kodomo-hp-form.metro.tokyo.lg.jp, spiral_site_domain: tokyo-kodomo-kidsenq}
+  - {original_domain: sprt.spiral-platform.com, spiral_site_domain: sp2-support-sprt}
+  - {original_domain: form.tanpakutoroukai.jp, spiral_site_domain: tanpakutoroukai-tproject}
+  - {original_domain: form.kokusyokokusan-cooking.jp, spiral_site_domain: form2022-kokusyokokusan-cooking-origin}
+  - {original_domain: customer.monet-technologies.com, spiral_site_domain: monet-technologies-inquiry}

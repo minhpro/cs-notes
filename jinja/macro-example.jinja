@@ -1,0 +1,12 @@
+{% macro site_api_setup(is_user_domain=False, user_domain=None) -%}
+{% if is_user_domain %}
+{{ user_domain.original_domain }}.{{ base_domain }}
+{% else %}
+*.{{ base_domain }}
+{% endif %}
+{%- endmacro %}
+
+{{ site_api_setup() }}
+{% for domain in user_original_domains %}
+{{ site_api_setup(is_user_domain=True, user_domain=domain) }}
+{% endfor %}

@@ -1,0 +1,396 @@
+\documentclass[xcolor={table, dvipsnames}]{beamer}
+\usepackage[utf8]{inputenc,vietnam}
+
+\usepackage{utopia} %font utopia imported
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Code syntax highlighter
+% https://latex-beamer.com/tutorials/beamer-code/
+% Install required tool https://pygments.org/
+% Add to PATH: texmaker > Preference
+% e.g. /Users/minhnt/Library/Python/3.8/bin
+\usepackage{minted}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\urlstyle{same}
+
+\newcommand\boldblue[1]{\textcolor{blue}{\textbf{#1}}}
+
+%------------------------------------------------
+%Information to be included in the title page:
+\title{Transaction Management}
+
+\subtitle{Hiểu và sử dụng transaction trong bài toán Concurrency}
+
+%
+%\author{Nguyen The Minh}
+%\institute{Electronics and Computer Science Home}
+%\date{Computing Conference, Oct 2050}
+%
+
+%\logo{\includegraphics[height=1.5cm]{atom.png}}
+
+%End of title page
+%-------------------------------------------------
+
+%------------------------------------------------------------
+%The next block of commands puts the table of contents at the 
+%beginning of each section and highlights the current section:
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Nội dung}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+%------------------------------------------------------------
+
+\begin{document}
+
+\frame{\titlepage}
+
+%---------------------------------------------------------
+%This block of code is for the table of contents after
+%the title page
+\begin{frame}
+\frametitle{Nội dung}
+\tableofcontents
+\end{frame}
+%---------------------------------------------------------
+
+\section{Giới thiệu Transactions}
+
+\begin{frame}
+\frametitle{Giới thiệu về Transactions}
+
+Nội dụng bao gồm:
+\begin{itemize}
+\item Khái niệm Transaction
+\item Tính ACID
+\item Xử lý đồng thời Transactions
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Khái niệm Transaction}
+
+Bài toán \textbf{Concurrency Control}:
+\begin{itemize}
+\item Nhiều người cùng truy cập database tại một thời điểm.
+\item Một người cập nhật trong khi có người khác đọc cùng một dữ liệu?
+\item Cả hai người cùng cập nhật dữ liệu cùng một lúc?
+\end{itemize}
+Vậy làm thế nào để truy cập dữ liệu \textbf{hiệu quả} và \textbf{an toàn}?
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Khái niệm Transaction}
+
+Transaction:
+\begin{itemize}
+\item Chuỗi các operations được executed như một \textit{single, logical, atomic} unit
+\item Kết quả trung gian không ảnh hưởng đến transactions khác.
+\item Hoàn thành tất cả hoặc không gì cả - all-or-nothing.
+\end{itemize}
+Các thao tác với database sẽ được thực hiện thông quan transactions.
+\end{frame}
+
+\begin{frame}
+\frametitle{Tính ACID}
+4 tính chất của transaction:
+\begin{itemize}
+\item \textbf{Atomic}: hoặc là tất cả hoặc không.
+\item \textbf{Consistency}: đảm bảo tính toàn vẹn, trách nhiệm của người dùng.
+\item \textbf{Isolation}: độc lập, không ảnh bởi transaction khác.
+\item \textbf{Durability}: khi hoàn thành, đảm bảo thay đổi được lưu lại.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Consistency và Isolation}
+Chuyển tiền từ tài khoản A sang cho B:
+\begin{itemize}
+\item Trừ tiền A
+\item Cộng tiền B
+\item Tiêu chí toàn vẹn: A + B
+\end{itemize}
+Chương trình lỗi: cộng tiền B thiếu 1 dollar so với trừ A
+\end{frame}
+
+\begin{frame}
+\frametitle{Consistency và Isolation}
+Tính cô lập thể hiện:
+\begin{itemize}
+\item Đồng thời xử lý = Tuần tự
+\item Lập lịch xen kẽ các transactions = Tuần tự thực hiện
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Atomicity và Durability}
+Transaction có thể bị dừng giữa chừng:
+\begin{itemize}
+\item Bị hủy bởi người dùng
+\item Hệ thống bị crash (mất điện)
+\item Dữ liệu bất thường hay không truy cập được ổ đĩa
+\end{itemize}
+Các thao tác giữa chừng cần phải undo?\\
+DBMS sử dụng logs để lưu các thay đổi
+\begin{itemize}
+\item Có thể undo
+\item Hay khôi phục hệ thống nếu chưa kịp lưu vào ổ đĩa
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Lập lịch xử lý transactions}
+Xử lý tuần tự vs interleaved (xen kẽ):
+\begin{itemize}
+\item Tận dụng CPU
+\item Tránh chờ I/O
+\item Đảm bảo thời gian response
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Lập lịch xử lý transactions}
+Một transaction - một series các actions:
+\begin{itemize}
+\item Transaction T đọc object O: $R_{T}(O)$
+\item T ghi object O: $W_{T}(O)$
+\item T complete: $Commit_{T}$
+\item T hủy (rollback): $Abort_{T}$
+\end{itemize}
+Bỏ qua T nếu ngữ cảnh rõ ràng
+\end{frame}
+
+\begin{frame}
+\frametitle{Ví dụ lịch xử lý transactions}
+\begin{tabular}{ll}
+T1 & T2 \\ 
+\hline 
+R(A) &  \\ 
+W(A) &  \\ 
+ & R(A) \\ 
+ & W(A) \\ 
+R(B) &  \\ 
+W(B) &  \\ 
+ & R(B) \\ 
+ & W(B) \\ 
+ & Commit \\ 
+Commit &  \\ 
+\end{tabular} 
+\end{frame}
+
+\begin{frame}
+\frametitle{Xung đột dữ liệu}
+Khi có nhiều transactions đồng thời, tồn tại các xung đột:
+\begin{itemize}
+\item Dirty read: đọc dữ liệu đã thay đổi bởi một transaction khác chưa commit
+\item Nonrepeatable read: đọc (sử dụng) cùng một dữ liệu lần 2 nhưng thấy đã bị thay đổi bởi transaction khác
+\item Phantom read: chạy lại cùng câu truy vấn với search condition và thấy tập dữ liệu trả về đã bị thay đổi bởi transaction khác
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Transaction Isolation Level}
+\begin{table}
+\begin{tabular}{|l|l|l|l|}
+\hline 
+\textbf{Isolation Level} & \textbf{Dirty} & \textbf{Nonrepeatable} & \textbf{Phantom} \\ 
+ & \textbf{Read} & \textbf{Read} & \textbf{Read} \\
+\hline 
+Read uncommited & X (PG) & X & X \\ 
+\hline 
+Read commited & -- & X & X \\ 
+\hline 
+Repeatable read & -- & -- & X (PG) \\ 
+\hline 
+Serializable & -- & -- & -- \\ 
+\hline 
+\end{tabular} 
+\caption{Bốn mức isolation của transactions}
+\end{table}
+PG: not in Postgresql
+\end{frame}
+
+\begin{frame}
+\frametitle{Serializable Level}
+Isolation level kiểm soát mức độ isolation của một transaction với các transaction đồng thời khác. Cao nhất là \textit{Serializable}:
+\begin{itemize}
+\item T chỉ đọc dữ liệu commited (no dirty read)
+\item Ko có giá trị đang đọc hay ghi bởi T được thay đổi bởi transaction khác
+\item T đang đọc một tập search condition thì tập này không được thay đổi bởi transaction khác
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{REPEATABLE READ Level}
+T chỉ đọc dữ liệu commited và ko có giá trị đang đọc hay ghi bởi T được thay đổi bởi transaction khác. Nhưng T có thể gặp phantom read. Ví dụ T truy vấn tất cả Books còn bản copies, transaction khác lại thêm một Book mới. Vậy T bị miss Book mới.
+\end{frame}
+
+\begin{frame}
+\frametitle{READ COMMITED Level}
+T chỉ đọc dữ liệu commited và ko có giá trị đang ghi bởi T được thay đổi bởi transaction khác. Tuy nhiên, một giá trị T đọc có thể bị thay đổi bởi transaction khác, dẫn đến "nonrepeatable read".
+\end{frame}
+
+\begin{frame}
+\frametitle{READ UNCOMMITED Level}
+Ở level này transaction có thể đọc giá trị đang được update bởi transaction (uncommited). Có thể coi là transaction không cần isolation.
+\end{frame}
+
+\begin{frame}
+\frametitle{Strict Two-phase Locking - Strict 2PL}
+Một cách để thực hiện các mức isolation là dùng cơ chế locking - Strict 2PL:
+\begin{itemize}
+\item T muốn đọc (ghi) O thì phải lấy được \textbf{shared lock} (\textbf{exclusive lock} của O. Khi có một exclusive lock trên O, các transactions không thể lấy lock shared hay exclusive lock khác trên O mà phải chờ.
+\item Tất cả locks được release khi transaction kết thúc.
+\end{itemize}
+Strict 2PL sẽ đảm bảo mức isolation "serializable", kết quả thực hiện sẽ giống khi làm tuần tự các transactions. Tuy vậy vấn đề deadlock có thể xảy ra?
+\end{frame}
+
+% Transaction support in SQL
+\section{Transactions trong SQL}
+\begin{frame}[fragile]
+\frametitle{Transactions trong SQL}
+Isolation mặc định: READ COMMITED Level\\
+Tạo transaction bằng command \verb|BEGIN| và \verb|COMMIT|:
+\rule{\textwidth}{1pt}
+\scriptsize
+\begin{minted}{sql}
+    BEGIN;
+    UPDATE accounts SET balance = balance - 100.00
+       WHERE name = 'Alice';
+    -- etc etc
+    COMMIT;
+\end{minted}
+\rule{\textwidth}{1pt}
+
+\begin{block}{Transaction characters}
+\begin{minted}{sql}
+START TRANSACTION [ transaction_mode [, ...] ]
+
+where transaction_mode is one of:
+
+    ISOLATION LEVEL { SERIALIZABLE | REPEATABLE READ | READ COMMITTED 
+    | READ UNCOMMITTED }
+    READ WRITE | READ ONLY
+\end{minted}
+    
+https://www.postgresql.org/docs/current/sql-start-transaction.html\\
+https://dev.mysql.com/doc/refman/8.0/en/set-transaction.html
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Transaction trong SQL}
+DBMS mặc định xử lý mỗi câu SQL (statement) trong một transaction.\\
+Bắt đầu bằng $BEGIN$ và kết thúc $COMMIT$ (nếu thành công).\\
+% example/implicit-explicit-transaction.sql
+\end{frame}
+
+\begin{frame}
+\frametitle{Rollback transaction}
+Sử dụng command $ROLLBACK$ để hủy transaction.\\
+% example/rollback-command.sql
+\pause
+Nếu transaction bị lỗi thì không thể $COMMIT$\\
+% example/error-commit-transaction.sql
+\pause
+\begin{block}{Exercise: make an error transaction}
+Add a constraint that doesn't allow any tags with length shorter than 2 characters.\\
+Create a transaction that violates the above constraint.
+% example/error-transaction-exercise.sql
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Ví dụ sử dụng transaction}
+Khi nào sử dụng transaction (explicit)?\\
+\pause
+Một luồng xử lý hoặc là thành công hoặc là thất bại.\\
+\pause
+\begin{block}{Exercise: lấy ví dụ sử dụng transaction}
+Chuyển tiền ngân hàng, trừ tài khoản A và cộng vào B.\\
+Các thao tác cần được làm trong cùng một transaction.\\
+\end{block} 
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Rollback with SAVEPOINT}
+Bỏ qua một phần và commit phần còn lại.\\
+\pause
+\begin{minted}{sql}
+BEGIN;
+UPDATE accounts SET balance = balance - 100.00
+	WHERE name = 'Alice';
+SAVEPOINT my_savepoint;
+UPDATE account SET balance = balance + 100.00
+	WHERE name = 'Bob';
+-- oops ... forget that and use Wally's account
+ROLLBACK TO my_savepoint;
+UPDATE account SET balance = balance + 100.00
+	WHERE name = 'Wally';
+COMMIT;
+\end{minted}
+\end{frame}
+\begin{frame}
+\frametitle{Ví dụ về SAVEPOINT}
+\begin{block}{Exercise: savepoint khi thêm tags}
+Tạo một transaction thêm nhiều tags.\\
+Định nghĩa một savepoint.\\
+Thực hiện rollback về savepoint.\\
+\end{block}
+\pause
+\begin{block}{More about savepoint}
+Tạo một transaction có nhiều savepoints.\\
+Thực hiện rollback về các savepoints.\\
+Kết quả sẽ ntn?.
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Thời gian trong transaction}
+Transaction được coi là Atomicity.\\
+Vậy thời gian trong transaction sẽ ra sao?\\
+\end{frame}
+
+\begin{frame}
+\frametitle{Deadlock trong SQL}
+Ví dụ tình huống xảy ra deadlock.\\
+Khi đó DBMS sẽ xử lý ra sao?\\
+\end{frame}
+
+% Locking section
+\section{Locking}
+
+\begin{frame}
+\frametitle{Cơ chế Locking}
+
+Xin chào
+
+\end{frame}
+
+% Crash recovery section
+\section{Crash Recovery}
+
+\begin{frame}
+\frametitle{Giới thiệu về Crash Recovery}
+
+Xin chào
+
+\end{frame}
+
+\end{document}

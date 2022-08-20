@@ -58,6 +58,7 @@ class ToDo{
 }
 ```
 
+SQL
 
 Department: deptId*, deptName, building
 
@@ -67,21 +68,31 @@ Teachers: teacherId*, teacherName, deptId**, salary
 
 1. Find the titles of courses in the `Comp. Sci.` department that have 3 credits.
 
-SELECT title  FROM Department d join Courses c on d.deptId = c.deptID WHERE c.credit = 3
-
-INNER JOIN vs LEFT JOIN
+select c.title
+FROM Courses c
+JOIN Department d
+ON c.deptID = d.deptId
+WHERE d.deptName = `Comp. Sci.` AND c.credits = 3
 
 A(id, aName)  B(id, bName)
 1, x1            1, y1
 2, x2            3, y3
 
 A INNER JOIN B (id)
-1, x1, y1
+1, x1 y1
+
 
 A LEFT JOIN B (id)
-1, x1,y1
-3,y3
+1, x1 y1
+2, x2 null
 
-B LEFT JOIN A
-1, x1,y1
-2,x2
+2. Increase the salary for each teach in the `Comp. Sci.` department by 10%
+
+UPDATE Teachers.salary
+(SELECT Teachers.salary
+FROM Teachers
+JOIN Department
+ON Department.deptID = Teachers.deptId)
+SET Teachers.salary = Teachers.salary*0.1
+WHERE d.deptName = `Comp. Sci.`
+

@@ -309,7 +309,7 @@ Sử dụng command $ROLLBACK$ để hủy transaction.\\
 Nếu transaction bị lỗi thì không thể $COMMIT$\\
 % example/error-commit-transaction.sql
 \pause
-\begin{block}{Exercise: make an error transaction}
+\begin{block}{Exercise 1: make an error transaction}
 Add a constraint that doesn't allow any tags with length shorter than 2 characters.\\
 Create a transaction that violates the above constraint.
 % example/error-transaction-exercise.sql
@@ -322,7 +322,7 @@ Khi nào sử dụng transaction (explicit)?\\
 \pause
 Một luồng xử lý hoặc là thành công hoặc là thất bại.\\
 \pause
-\begin{block}{Exercise: lấy ví dụ sử dụng transaction}
+\begin{block}{Exercise 2: lấy ví dụ sử dụng transaction}
 Chuyển tiền ngân hàng, trừ tài khoản A và cộng vào B.\\
 Các thao tác cần được làm trong cùng một transaction.\\
 \end{block} 
@@ -348,7 +348,7 @@ COMMIT;
 \end{frame}
 \begin{frame}
 \frametitle{Ví dụ về SAVEPOINT}
-\begin{block}{Exercise: savepoint khi thêm tags}
+\begin{block}{Exercise 3: savepoint khi thêm tags}
 Tạo một transaction thêm nhiều tags.\\
 Định nghĩa một savepoint.\\
 Thực hiện rollback về savepoint.\\

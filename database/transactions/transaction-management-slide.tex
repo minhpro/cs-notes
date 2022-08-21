@@ -255,7 +255,7 @@ T chỉ đọc dữ liệu commited và ko có giá trị đang ghi bởi T đư
 \frametitle{Strict Two-phase Locking - Strict 2PL}
 Một cách để thực hiện các mức isolation là dùng cơ chế locking - Strict 2PL:
 \begin{itemize}
-\item T muốn đọc (ghi) O thì phải lấy được \textbf{shared lock} (\textbf{exclusive lock} của O. Khi có một exclusive lock trên O, các transactions không thể lấy lock shared hay exclusive lock khác trên O mà phải chờ.
+\item T muốn đọc (ghi) O thì phải lấy được \textbf{shared lock} (\textbf{exclusive lock}) của O. Khi có một exclusive lock trên O, các transactions không thể lấy lock shared hay exclusive lock khác trên O mà phải chờ.
 \item Tất cả locks được release khi transaction kết thúc.
 \end{itemize}
 Strict 2PL sẽ đảm bảo mức isolation "serializable", kết quả thực hiện sẽ giống khi làm tuần tự các transactions. Tuy vậy vấn đề deadlock có thể xảy ra?
@@ -367,11 +367,11 @@ Transaction được coi là Atomicity.\\
 Vậy thời gian trong transaction sẽ ra sao?\\
 \end{frame}
 
-\begin{frame}
-\frametitle{Deadlock trong SQL}
-Ví dụ tình huống xảy ra deadlock.\\
-Khi đó DBMS sẽ xử lý ra sao?\\
-\end{frame}
+%\begin{frame}
+%\frametitle{Deadlock trong SQL}
+%Ví dụ tình huống xảy ra deadlock.\\
+%Khi đó DBMS sẽ xử lý ra sao?\\
+%\end{frame}
 
 % Locking section
 \section{Locking}

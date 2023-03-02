@@ -17,7 +17,7 @@ CREATE DATABASE forumdb;
 \c forumdb
 
 CREATE TABLE users (
-    pk int GENERATED ALWAYS AS IDENTITY
+    pk int NOT NULL AUTO INCREMENT
     , username text NOT NULL
     , gecos text
     , email text NOT NULL
@@ -33,7 +33,7 @@ CREATE TABLE users (
   * 'unix', 'database', 'php', 'perl' and so on
   */
 CREATE TABLE categories (
-    pk int GENERATED ALWAYS AS IDENTITY
+    pk int NOT NULL AUTO INCREMENT
     , title text NOT NULL
     , description text
     , PRIMARY KEY ( pk )
@@ -54,7 +54,7 @@ INSERT INTO categories( title, description )
   * a link to the post it is replying to.
   */
 CREATE TABLE posts (
-    pk int GENERATED ALWAYS AS IDENTITY
+    pk int NOT NULL AUTO INCREMENT
     , title           text
     , content         text
     , author          int NOT NULL
@@ -77,7 +77,7 @@ CREATE TABLE posts (
   * A tag can be nested into other tags.
   */
 CREATE TABLE tags (
-    pk        int GENERATED ALWAYS AS IDENTITY
+    pk        int NOT NULL AUTO INCREMENT
     , tag     text NOT NULL
     , parent  int
 

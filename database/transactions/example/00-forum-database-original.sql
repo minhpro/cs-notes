@@ -1,6 +1,8 @@
 --
 -- Create the forum database
 --
+-- Learn PostgreSQL
+
 
 /**
   * General rules:
@@ -8,7 +10,10 @@
   * - every surrogated primary key is named 'pk' (as Primary Key);
   * - every table name is plural
   *
-  * To use this script from a shell
+  * To use this script from an already established connection:
+  * template1=> \i 00-forum-database.sql
+  *
+  * or to use from a shell
   * $ psql -U postgres template1 < 00-forum-database.sql
   */
 
@@ -24,6 +29,13 @@ CREATE TABLE users (
     , PRIMARY KEY( pk )
     , UNIQUE ( username )
     );
+
+ /*
+  * TODO
+  * add some columns to the table to demonstrate the ALTER TABLE
+  * for instance add a `member_since` with automatic timestamp default
+  * add also a gravatr column?
+  */
 
 
 /**
@@ -69,6 +81,14 @@ CREATE TABLE posts (
     , FOREIGN KEY( reply_to ) REFERENCES posts( pk )
     , FOREIGN KEY( category ) REFERENCES categories( pk )
     );
+
+ /*
+  * TODO
+  * CTE & recursive CTE to find out top level post (without any reply)
+  * create a view 'thread' to show top level post only and the number of child posts
+  * create a trigger that 'frozes' a post after a specific amount of time
+  * create a RLS to allow editing of only own posts
+  */
 
 /**
   * A tag is a "label" that can be attached to a post

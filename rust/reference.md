@@ -81,4 +81,77 @@ fn show(l: &Vec<String>) {
 }
 ```
 
+## Implicitly Dereferences
 
+References are created explicitly with the `&` operater, and dereferenced explicitly with the `*` operater.
+
+```rust
+let mut x = 20;
+let m = &mut x;       // &mut x is a mutable reference to x
+*m += 20;            // explicitly dereference m to set x's value
+assert!(*m == 40);  // and to see x's new value
+```
+
+But Rust provides the implicitly dereference future when using `.` operator.
+The `.` operator implicitly dereferences its left operand, if needed:
+
+```rust
+struct Book { title: String, author: String, price: f32 };
+
+let b = Book { title: "new age".to_string(), author: "unknown".to_string(), price: 20.5 };
+let b_ref = &b;
+assert_eq!(b_ref.title, "new age".to_string());
+
+// Equivalent to the above, but with explicitly dereference written out
+assert_eq!((*b_ref).title, "new age".to_string()); 
+```
+
+The `println!` macro used in the `show` function expands to code that uses the `.` operator,
+so it takes an implicit dereference to its arguments if needed.
+
+Let's take more examples, such as `Vector's sort` method:
+
+```rust
+let mut numbers = vec![1993, 2001, 1196, 2023];
+numbers.sort();        // implicitly borrows a mutable reference to numbers
+(&mut numbers).sort(); // equivalent, but more verbose
+```
+
+## Structs Containing References
+
+How about placing a reference in a struct
+
+```rust
+struct S {
+    r: &i32
+}
+```
+
+There is an error when compliling code
+
+```txt
+error[E0106]: missing lifetime specifier
+ --> src/main.rs:2:8
+  |
+2 |     r: &i32,
+  |        ^ expected named lifetime parameter
+```
+
+Whenever a reference type appears inside another type's definition, you mus write out its lifetime
+
+```rust
+struct S<'a> {
+  r: &'a i32
+}
+```
+
+The expression `S { r: &x }` creates a fresh S value with some lifetime `'a`. When you store `&x`
+in the `r` field, you constrain `'a` to lie entirely within `x`'s lifetime.
+
+How does you define another type contains a reference to `S`? You have place a lifetime parameter.
+
+```rust
+struct D<'a> {
+  s: S<'a>
+}
+```

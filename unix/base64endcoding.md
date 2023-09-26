@@ -1,1 +1,0 @@
-openssl base64 -in <infile> -out <outfile>

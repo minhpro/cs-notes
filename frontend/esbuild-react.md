@@ -247,7 +247,7 @@ export let Button = ({ text }) =>
   <div className="button">{text}</div>
 ```
 
-The bundled JavaScript được generated từ esbuild sẽ không tự động import file CSS vào HTML page. Bạn vần import file CSS cùng với JS đã được generated vào trang HTML. Qua đó browser cũng có thể download CSS và JavaScript một cách song song. Cách import như sau:
+The bundled JavaScript được generated từ esbuild sẽ không tự động import file CSS vào HTML page. Bạn cần import file CSS cùng với JS đã được generated vào trang HTML. Qua đó browser cũng có thể download CSS và JavaScript một cách song song. Cách import như sau:
 
 ```html
 <html>

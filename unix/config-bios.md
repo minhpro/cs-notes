@@ -1,0 +1,1 @@
+https://www.technewsworld.com/story/how-to-set-up-your-computer-to-auto-restart-after-a-power-outage-86034.html

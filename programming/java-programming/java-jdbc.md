@@ -167,6 +167,7 @@ Postgresql, MariaDB and Oracle support `RETURNING` clause, but MySQL doesn't.
 
 * https://www.postgresql.org/docs/current/dml-returning.html
 * https://mariadb.com/kb/en/insertreturning/
+* https://docs.oracle.com/en/database/oracle/oracle-database/19/lnpls/RETURNING-INTO-clause.html
 
 With MySQL, take another way
 

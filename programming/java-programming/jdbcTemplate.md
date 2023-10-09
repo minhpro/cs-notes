@@ -266,3 +266,96 @@ Có khá nhiều APIs khác hữu ích, và bạn nên tham khảo javadocs,
 - `org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate`
 
 Notes: ngoài ra, bạn cũng nên tham khảo javadoc để biết cách xử lý các case exception của mỗi APIs.
+
+## Một số tools khác
+
+Các thư viện làm việc với database thường chia làm 2 styles:
+
+**ORM**:
+* Trong lập trình Java, các thư viện ORM (Object Relational Mapping) thường implement chuẩn JPA - Jakarta Persistence API
+* https://jakarta.ee/specifications/persistence/
+* Một số thư viện có thể kể đến như
+  * Spring JPA (Hibernate powered)
+  * Hibernate (ngoài implement JPA thì Hibernate còn cung cấp nhiều tính năng khác??)
+  * EclipseLink
+  * Apache OpenJPA
+**Non ORM**
+* JdbcTemplate
+* Apache Common DbUtils
+* FluentJdbc: https://github.com/zsoltherpai/fluent-jdbc
+* Mybatis (một template engine để viết SQL)
+* JOOQ (với SQL theo kiểu type-safe DSL)
+
+## Obtaining Auto-generated keys
+
+Thường thì các bảng hay có key `id` là trường auto-generated, và rất nhiều trường hợp như `insert` dữ liệu mới thì chúng ta muốn nhận về key này (để dùng làm foreign key cho bảng khác chẳng hạn). Nhiều database hỗ trợ điều này, cụ thể qua `RETURNING` clause.
+
+```sql
+INSERT ... RETURNING ID;
+```
+
+Nhưng thay vì sử dụng API `update` thì bạn cần dùng `query`.
+
+```Java
+final var sql = "insert into products(pname, price) values(?, ?) returning id";
+
+var insertedId = jdbcTemplate.selectForObject(sql, Integer.class, "Product 01", 100);
+```
+
+Postgresql, MariaDB and Oracle support `RETURNING` clause, but MySQL doesn't.
+
+* https://www.postgresql.org/docs/current/dml-returning.html
+* https://mariadb.com/kb/en/insertreturning/
+* https://docs.oracle.com/en/database/oracle/oracle-database/19/lnpls/RETURNING-INTO-clause.html
+
+Với MySQL, bạn cần dùng API sau:
+
+```Java
+// psc – a callback that provides SQL and any necessary parameters 
+// generatedKeyHolder – a KeyHolder that will hold the generated keys
+// Returns the number of rows affected
+int update(PreparedStatementCreator psc, KeyHolder generatedKeyHolder) throws DataAccessException;
+```
+
+Xét ví dụ,
+
+```Java
+final var sql = "insert into products(pname, price) values(?, ?) returning id";
+
+KeyHolder keyHolder = new GeneratedKeyHolder();
+jdbcTemplate.update(connection -> {
+  PreparedStatement ps = connection
+      .prepareStatement(insertSql);
+  ps.setString(1, "Product 01");
+  ps.setInt(2, 100);
+  return ps;
+}, keyHolder);
+
+var insertedId = (long) keyHolder.getKey();
+```
+
+Nếu không thích API trên, thì Spring JDBC cung cấp một API khác sử dụng `SimpleJdbcInsert`, để sửa dụng class này thì bạn cần `Autowired` datasource.
+
+```Java
+// args – a Map containing column names and corresponding value
+// returns the generated key value
+Number executeAndReturnKey(Map<String, ?> args);
+
+// returns the KeyHolder containing all generated keys
+KeyHolder executeAndReturnKeyHolder(Map<String, ?> args);
+```
+
+Xét ví dụ,
+
+```Java
+@Autowired Datasource datasource;
+
+final var sql = "insert into products(pname, price) values(?, ?)";
+
+SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(datasource)
+  .withTableName("products")
+  .usingGeneratedKeyColumns("id");
+
+Map<String, Object> params = Map.of("pname", "Product 01", "price", 100);
+var insertedId = (long) simpleJdbcInsert.executeAndReturnKey(params);
+```

@@ -25,7 +25,7 @@ String text = """
 
 Với TextBlocks, bạn có thể hiểu là viết String như nào thì print sẽ ra như thế.
 
-### Switch Expressions
+### New Switch Expressions
 
 Switch Expressions cho phép bạn return giá trị từ `switch` và sử dụng trong assignment, etc. Cấu pháp `switch` sẽ có chút thay đổi:
 * dùng `->` thay vì `:`
@@ -124,6 +124,27 @@ private static void patternMatching() {
 
 Java 11 chỉ show ra line number nơi mà `NullPointerException` xảy ra, nhưng chúng ta không rõ chained method nào dẫn tới `null`. 
 
+```Java
+public static void main(String... args) {
+    String s = null;
+    System.out.println(s.toLowerCase());
+}
+```
+
+Java 11
+
+```
+Exception in thread "main" java.lang.NullPointerException
+	at Main.main(Main.java:4)
+```
+
+Java 17
+
+```
+Exception in thread "main" java.lang.NullPointerException: Cannot invoke "String.toLowerCase()" because "s" is null
+	at edu.javamodules/edu.javaversions.eleventoseventeen.NpeExample.main(NpeExample.java:7)
+```
+
 Java 17 sẽ chỉ rõ `NullPointerException` xảy ra ở đâu, kèm theo thông tin chained method.
 
 ## Compact Number Formatting Support
@@ -150,6 +171,12 @@ Output:
 Khi collect một stream về một list,
 
 Thay vì phải `myStream.collect(Collectors.toList())` thì chỉ cần đơn giản `myStream.toList()`.
+
+## Migration
+
+https://blogs.halodoc.io/jdk-17-migration/
+
+https://www.youtube.com/watch?v=1wMdUtL_fSg
 
 ## References
 

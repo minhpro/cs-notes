@@ -1,0 +1,36 @@
+## Java Programming List
+
+- Project Tools
+  - [Maven](maven.md)
+  - Gradle
+- CLI
+  - https://commons.apache.org/proper/commons-cli/
+- Configuration
+  - [Java Environment](https://docs.oracle.com/javase/tutorial/essential/environment/env.html)
+  - [Apache Common Configuration](https://docs.oracle.com/javase/tutorial/essential/environment/env.html)
+- Networking
+  - https://netty.io/
+- Logging
+  - TinyLog: https://github.com/tinylog-org/tinylog
+    - https://ckinan.com/blog/tinylog-simple-example-rolling-file-writer/
+    - https://tinylog.org/v2/configuration/
+    - https://www.baeldung.com/java-logging-tinylog-guide
+  - Log4j2: https://logging.apache.org/log4j/2.x/manual/architecture.html
+- Web programming
+  - Spring framework
+    - [How to](https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html)
+  - Ktor
+  - Play
+  - Spark
+- Template Engine
+  - Freemaker
+  - Thymeleaf
+  - Velocity
+  - Muscle
+- Database programming
+  - JDBC
+  - https://github.com/apache/commons-dbutils
+  - Hibernate
+  - Mybatis
+  - JOOQ
+- 

@@ -272,6 +272,7 @@ Notes: ngoài ra, bạn cũng nên tham khảo javadoc để biết cách xử l
 Các thư viện làm việc với database thường chia làm 2 styles:
 
 **ORM**:
+
 * Trong lập trình Java, các thư viện ORM (Object Relational Mapping) thường implement chuẩn JPA - Jakarta Persistence API
 * https://jakarta.ee/specifications/persistence/
 * Một số thư viện có thể kể đến như
@@ -279,7 +280,9 @@ Các thư viện làm việc với database thường chia làm 2 styles:
   * Hibernate (ngoài implement JPA thì Hibernate còn cung cấp nhiều tính năng khác??)
   * EclipseLink
   * Apache OpenJPA
+
 **Non ORM**
+
 * JdbcTemplate
 * Apache Common DbUtils
 * FluentJdbc: https://github.com/zsoltherpai/fluent-jdbc
@@ -343,6 +346,10 @@ Number executeAndReturnKey(Map<String, ?> args);
 
 // returns the KeyHolder containing all generated keys
 KeyHolder executeAndReturnKeyHolder(Map<String, ?> args);
+
+// Other APIs
+public Number executeAndReturnKey(SqlParameterSource parameterSource);
+public KeyHolder executeAndReturnKeyHolder(SqlParameterSource parameterSource);
 ```
 
 Xét ví dụ,
@@ -358,4 +365,138 @@ SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(datasource)
 
 Map<String, Object> params = Map.of("pname", "Product 01", "price", 100);
 var insertedId = (long) simpleJdbcInsert.executeAndReturnKey(params);
+
+// OR using BeanPropertySqlParameterSource
+record NewProduct(String pname, int price){};
+final newProduct = new NewProduct("Product 01", 100);
+var insertedId = (long) simpleJdbcInsert.executeAndReturnKey(new BeanPropertySqlParameterSource(newProduct));
 ```
+
+## Passing parameters as List to `IN` clause
+
+Giả sử cần lấy ra tất cả các Product có id nằm trong danh sách sau: 1, 2, 3, 4, 5
+
+```sql
+select pname as name, price
+  from products
+  where id IN (1,2,3,4,5);
+```
+
+Nếu danh sách ids là một tham số thì ta cần phải làm gì?
+
+Ý tưởng là sử dụng `String.join(",")` để tạo placeHolders (`?`) trong mệnh đề `IN` clause. Và sử dụng API sau để pass một array như là tham số:
+
+```Java
+// You can pass an array as args, Java will autoboxing an array to varargs
+<T> List<T> query(String sql, RowMapper<T> rowMapper, @Nullable Object... args)
+```
+
+Xét ví dụ,
+
+```Java
+final List<Integer> ids = List.of(1,2,3,4,5);
+
+final var sqlTemplate = """
+  select pname as name, price
+  from products
+  where id IN (%s)
+  """;
+
+// First, using  '?' characters as placeholders for the list of values
+final String inPlaceHolders = String.join(",", Collections.nCopies(ids.size(), "?"))
+// Second, place inPlaceHolers into sqlTemplate
+// The result will be "select ... IN(?,?,?,?,?)"
+final var sql = String.format(sqlTemplate, inPlaceHolders);
+
+// Convert List to array and pass it as args
+List<Product> products = jdbcTemplate.query(sql, new DataClassRowMapper<>(Product.class), ids.toArray()); // Remember `toArray()`
+```
+
+Nếu bạn không thích cách trên thì có thể sử dụng `NamedParameterJdbcTemplate` như sau:
+
+API:
+
+```Java
+public <T> List<T> query(String sql, SqlParameterSource paramSource, RowMapper<T> rowMapper)
+```
+
+Code:
+
+```Java
+final List<Integer> ids = List.of(1,2,3,4,5);
+
+final var sqlTemplate = """
+  select pname as name, price
+  from products
+  where id IN (:ids)
+  """;
+
+SqlParameterSource parameters = new MapSqlParameterSource("ids", ids);
+List<Product> products = namedParameterJdbcTemplate.query(sql, parameters, new DataClassRowMapper<>(Product.class));
+```
+
+API trên có vẻ đơn giản và dễ dùng hơn `JdbcTemplate`, nhưng đăng nhiên phần xử lý bên trong nó có phần phức tạp hơn.
+
+## Pagination and Sorting
+
+Spring cung cấp interface cho việc phân trang và sorting được mô tả như sau:
+
+Đầu tiên là thiết kế query params, xem ví dụ sau:
+
+
+```sh
+GET /products/search?page=2&size=20&sort=a,asc&sort=b,desc&sort=c
+```
+
+
+Tiếp đó là encapsulate these parameters into a `Pagable` object:
+
+- page is 2 (default is 0)
+- size is 20 (default is 20)
+- sort is a array of Order(String field, Direction direction: default is asc)
+
+```Java
+@GetMapping("/products/search")
+public Page<Product> search(Pageable pagable) {
+  // TODO
+}
+````
+
+Từ `page` và `size`, ta dựng câu `LIMIT ? OFFSET ?` clause
+
+```Java
+public String buildLimitOffsetClause(int page, int size) {
+  return String.format("LIMIT %d OFFSET %d", page, size)
+}
+```
+
+Từ Sort, ta build `ORDER BY` clause
+
+```Java
+if (sort.isEmpty())
+    return Strings.EMPTY;
+
+String orderColumns = sort.stream()
+        .map(x -> x.getProperty() + " " + x.getDirection().name())
+        .collect(Collectors.joining(", "));
+
+return String.format("ORDER BY %s", orderColumns);
+```
+
+Để count số lượng bảng ghi thì ta wrap câu SQL trong một câu `count(*)`
+
+```Java
+String countSql = String.format("SELECT COUNT(*) from (%s) t", sql);
+```
+
+
+**References**:
+
+- https://docs.spring.io/spring-data/rest/docs/current/reference/html/#paging-and-sorting
+- [Implementation](code/DatabaseHelper.java)
+
+## Transaction Management
+
+https://spring.io/guides/gs/managing-transactions/
+
+https://docs.spring.io/spring-framework/reference/data-access/transaction/declarative/tx-propagation.html

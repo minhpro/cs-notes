@@ -10,12 +10,15 @@
   - [Apache Common Configuration](https://docs.oracle.com/javase/tutorial/essential/environment/env.html)
 - Networking
   - https://netty.io/
+  - https://github.com/AsyncHttpClient/async-http-client
 - Logging
   - TinyLog: https://github.com/tinylog-org/tinylog
     - https://ckinan.com/blog/tinylog-simple-example-rolling-file-writer/
     - https://tinylog.org/v2/configuration/
     - https://www.baeldung.com/java-logging-tinylog-guide
   - Log4j2: https://logging.apache.org/log4j/2.x/manual/architecture.html
+    - https://logging.apache.org/log4j/2.x/manual/api-separation.html#using-log4j2-api-and-core
+    - https://www.digitalocean.com/community/tutorials/log4j2-example-tutorial-configuration-levels-appenders
 - Web programming
   - Spring framework
     - [How to](https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html)

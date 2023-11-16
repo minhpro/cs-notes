@@ -1,9 +1,16 @@
 package my_group.web;
 
+import jakarta.servlet.Filter;
+import jakarta.servlet.annotation.WebFilter;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
@@ -12,13 +19,25 @@ import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring6.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
+@EnableWebSecurity
+@Import({WebSecurityConfiguration.class})
 public class WebConfig extends DelegatingWebMvcConfiguration {
 
     ApplicationContext applicationContext;
 
     public WebConfig(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
+    }
+
+    @Bean
+    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests((requests) -> requests.anyRequest().authenticated());
+        http.formLogin(withDefaults());
+        http.httpBasic(withDefaults());
+        return http.build();
     }
 
     @Override
@@ -76,7 +95,7 @@ public class WebConfig extends DelegatingWebMvcConfiguration {
     /*  TemplateResolver <- TemplateEngine <- ViewResolver              */
     /* **************************************************************** */
 
-//    @Bean
+    //    @Bean
     public SpringResourceTemplateResolver templateResolver() {
         // SpringResourceTemplateResolver automatically integrates with Spring's own
         // resource resolution infrastructure, which is highly recommended.
@@ -92,7 +111,7 @@ public class WebConfig extends DelegatingWebMvcConfiguration {
         return templateResolver;
     }
 
-//    @Bean
+    //    @Bean
     public SpringTemplateEngine templateEngine() {
         // SpringTemplateEngine automatically applies SpringStandardDialect and
         // enables Spring's own MessageSource message resolution mechanisms.
@@ -107,8 +126,8 @@ public class WebConfig extends DelegatingWebMvcConfiguration {
         return templateEngine;
     }
 
-//    @Bean
-    public ThymeleafViewResolver viewResolver(){
+    //    @Bean
+    public ThymeleafViewResolver viewResolver() {
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
         viewResolver.setTemplateEngine(templateEngine());
         // NOTE 'order' and 'viewNames' are optional

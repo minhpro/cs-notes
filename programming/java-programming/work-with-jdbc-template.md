@@ -41,7 +41,7 @@ T mapRow(ResultSet rs, int rowNum);
 You can construct a `RowMapper` as following guide:
 
 - If your data class (e.g. DTO) is a bean (no args constructor, getter, setter) -> using `BeanPropertyRowMapper`.
-- If your data class is immutable (only constructors) -> using the helper factory method `DatabaseHelper.constructorRowMapper(Class<T> mappedClass)`.
+- If your data class is immutable (only constructors) -> using the helper factory method `DatabaseHelper.constructorRowMapper(Class<T> mappedClass)`. [DatabaseHelper](./code-snippet/DatabaseHelper.java)
 - If your data class is a Java Record -> using `DataClassRowMapper`.
 - Otherwise, making your own `RowMapper`, like that.
 
@@ -59,7 +59,7 @@ See more about `JdbcTemplate` in the [link](https://docs.spring.io/spring-framew
 
 ## Pagination and Sorting
 
-[`DatabaseHelper`](code/DatabaseHelper.java) class provides some useful APIs to work with pagination and sorting.
+[`DatabaseHelper`](./code-snippet/DatabaseHelper.java) class provides some useful APIs to work with pagination and sorting.
 
 For example, an API to working `Pagable` parameter,
 

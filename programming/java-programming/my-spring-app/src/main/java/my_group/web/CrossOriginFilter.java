@@ -1,6 +1,7 @@
 package my_group.web;
 
 import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
@@ -67,6 +68,7 @@ import java.util.regex.Pattern;
  * &lt;/web-app&gt;
  * </pre></p>
  */
+//@WebFilter
 public class CrossOriginFilter implements Filter
 {
     private static final Logger LOG = LogManager.getLogger();

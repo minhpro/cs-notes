@@ -152,6 +152,49 @@ Thông thường khi phát triển REST API, chúng ta sẽ trả response về 
 </dependency>
 ```
 
+Trường hợp làm việc với JDK8 (kiểu Optional) thì cần khai báo jdk8Module
+
+```xml
+<dependency>
+  <groupId>com.fasterxml.jackson.datatype</groupId>
+  <artifactId>jackson-datatype-jdk8</artifactId>
+  <version>${jackson.version}</version>
+</dependency>
+```
+
+Khi này WebMvcConfigurationSupport sẽ tự động đăng ký jdk8Module cho ObjectMapper của MappingJackson2HttpMessageConverter. Cụ thể thì xem đoạn code của `Jackson2ObjectMapperBuilder` 
+
+```Java
+private void registerWellKnownModulesIfAvailable(MultiValueMap<Object, Module> modulesToRegister) {
+		try {
+			Class<? extends Module> jdk8ModuleClass = (Class<? extends Module>)
+					ClassUtils.forName("com.fasterxml.jackson.datatype.jdk8.Jdk8Module", this.moduleClassLoader);
+			Module jdk8Module = BeanUtils.instantiateClass(jdk8ModuleClass);
+			modulesToRegister.set(jdk8Module.getTypeId(), jdk8Module);
+		}
+		catch (ClassNotFoundException ex) {
+			// jackson-datatype-jdk8 not available
+		}
+
+		try {
+			Class<? extends Module> javaTimeModuleClass = (Class<? extends Module>)
+					ClassUtils.forName("com.fasterxml.jackson.datatype.jsr310.JavaTimeModule", this.moduleClassLoader);
+			Module javaTimeModule = BeanUtils.instantiateClass(javaTimeModuleClass);
+			modulesToRegister.set(javaTimeModule.getTypeId(), javaTimeModule);
+		}
+...
+```
+
+Để xử dụng jdk8 datetime với jackson thì khai báo
+
+```xml
+<dependency>
+  <groupId>com.fasterxml.jackson.datatype</groupId>
+  <artifactId>jackson-datatype-jsr310</artifactId>
+  <version>${jackson.version}</version>
+</dependency>
+```
+
 Xem thêm phần cấu hình MessageConverter ở tài liệu: https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-config/message-converters.html
 
 # Exception Handling
@@ -220,11 +263,20 @@ class DecoratorExample implements OriginalInterface {
 }
 ```
 
-Một ví dụ sử dụng khái niệm wrapper (hay decorator) để thêm header vào request: [RequestHeaderWapper](./my-spring-app/src/main/java/my_group/web/RequestHeaderWrapper.java).
+Một ví dụ sử dụng khái niệm wrapper (hay decorator) để thêm header vào request: [RequestHeaderWapper](./my-spring-app/src/main/java/my_group/web/filter/RequestHeaderWrapper.java).
+
+Cách dùng wrapper: [example](./my-spring-app/src/main/java/my_group/web/LogFilter.java)
 
 ## Filter xử lý response
 
-Xử lý response trước khi pass qua Servlet
+Với một số trường hợp có thể sửa response trực tiếp như thêm header hay cookie, nếu cần sửa lý được biệt như can thiệp vào body của response thì cần phải có kỹ thuật riêng. Ví dụ tạo một filter để ghi lại response sang một OutputStream khác (như là System.out), chúng ta cần wrap ServletOutputStream và thực hiện cách hàm `write` trên đồng thời của ServletOutputStream và OutputStream của chúng ta. Xem [ví dụ](./my-spring-app/src/main/java/my_group/web/filter/ReflectResponseFilter.java).
+
+# Security
+
+Chúng ta có thể sử dụng Spring security project, tuy nhiên để đơn giản chúng ta có thể tự tạo cơ chế authentication và authorization cho riêng mình. 
+
+Xét ví dụ demo sử dụng một Filter để parse JwtToken [JWTFilter](./my-spring-app/src/main/java/my_group/web/filter/JWTFilter.java). Từ đó dùng Jwt token để authentication.
+
 
 # References
 - https://www.baeldung.com/spring-mvc-handlerinterceptor-vs-filter

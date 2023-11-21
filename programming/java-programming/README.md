@@ -36,4 +36,5 @@
   - Hibernate
   - Mybatis
   - JOOQ
-- 
+- Security
+  - https://github.com/jwtk/jjwt#example-jws-eddsa

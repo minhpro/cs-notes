@@ -1,4 +1,4 @@
-package my_group.web;
+package my_group.web.filter;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletRequestWrapper;
@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RequestHeaderWrapper extends HttpServletRequestWrapper {
-    private Map<String, String> headerMap;
+    private final Map<String, String> headerMap;
     /**
      * Constructs a request object wrapping the given request.
      *

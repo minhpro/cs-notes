@@ -1,4 +1,4 @@
-package my_group.web;
+package my_group.web.filter;
 
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;

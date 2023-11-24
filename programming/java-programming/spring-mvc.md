@@ -199,14 +199,64 @@ Xem thêm phần cấu hình MessageConverter ở tài liệu: https://docs.spri
 
 # Exception Handling
 
-Để xử lý Exception do Controller throws, Spring cung cấp các tiện ích để chúng ta handle cho từng Controller hay handle global cho tất cả các Controller. Để handle cho một Controller cụ thể thì xử dụng `@ExceptionHandler` trong Controller đó. Còn nếu muốn handle cho tất cả các Controller thì dùng annotation này trong một class được khai báo với `@ControllerAdvice`.
+Trong code `DispatcherServlet` của Spring, có một hàm xử lý exception
 
 ```Java
-@ExceptionHandler({FileSystemException.class, RemoteException.class})
-public ResponseEntity<String> handle(IOException ex) {
-	// ...
+protected ModelAndView processHandlerException(HttpServletRequest request, HttpServletResponse response,
+			@Nullable Object handler, Exception ex) throws Exception
+```
+
+Khi này, lần lượt từng **HandlerExceptionResolver** trong danh sách **handlerExceptionResolvers** của **DispatcherServlet** được lấy ra để xử lý Exception.
+
+```Java
+for (HandlerExceptionResolver resolver : this.handlerExceptionResolvers) {
+  exMv = resolver.resolveException(request, response, handler, ex);
+  if (exMv != null) {
+    break;
+  }
 }
 ```
+
+Mỗi một **HandlerExceptionResolver** sẽ implement một interface xử lý exception sau:
+
+```Java
+public interface HandlerExceptionResolver {
+  ModelAndView resolveException(HttpServletRequest req, HttpServletResponse res, Object handler, Exception ex); 
+}
+```
+
+DispatcherServlet sẽ tìm kiếm tất cả các bean của ApplicationContext thuộc loại **HandlerExceptionResolver** để thêm vào danh sách **handlerExceptionResolvers** của mình.
+
+```Java
+private void initHandlerExceptionResolvers(ApplicationContext context) {
+  ...
+  // Find all HandlerExceptionResolvers in the ApplicationContext, including ancestor contexts.
+  Map<String, HandlerExceptionResolver> matchingBeans = BeanFactoryUtils
+      .beansOfTypeIncludingAncestors(context, HandlerExceptionResolver.class, true, false);
+  if (!matchingBeans.isEmpty()) {
+    this.handlerExceptionResolvers = new ArrayList<>(matchingBeans.values());
+    // We keep HandlerExceptionResolvers in sorted order.
+    AnnotationAwareOrderComparator.sort(this.handlerExceptionResolvers);
+  }
+  ...
+```
+
+Trong SpringMvc, chúng ta thường dùng class `WebMvcConfigurationSupport` (hay class kế thừa là `DelegatingWebMvcConfiguration`) để cấu hình bean **HandlerExceptionResolver** và cụ thể là **HandlerExceptionResolverComposite**, object này đóng vai trò như là chain of handlerExceptionResolvers. Thứ tự các **HandlerExceptionResolver** được thêm vào class composite này là:
+- Các `resovler` custom được tạo ra bằng cách implement hàm abstract `configureHandlerExceptionResolvers`.
+- Các `resolver` default
+  - `ExceptionHandlerExceptionResolver`: resolves exceptions through `@ExceptionHandler` methods, các hàm của Controler hay của ControllerAdvice được đánh dấu annotatioin này. Lưu ý là không dùng cho RouterFunction.
+  - `ResponseStatusExceptionResolver`: một HandlerExceptionResolver sử dụng `@ResponseStatus` annotation để map exceptions với HTTP status codes.
+  - `DefaultHandlerExceptionResolver`: resolver mặc định
+  - Các `resolver` mở rộng được thêm bằng cách implement hàm `extendHandlerExceptionResolvers`.
+
+Thông thường, chúng ta sẽ dùng 2 cách để thêm custom `HandlerExceptionResolver`:
+- implement hàm `configureHandlerExceptionResolvers` của `WebMvcConfigurationSupport`
+- Sử dụng annotation `@ExceptionHandler`.
+
+See example: [HandlerAdviceConfig](./my-spring-app/src/main/java/my_group/web/ExceptionHandlerAdviceConfig.java)
+
+Tham khảo:
+- https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc
 
 # Filter
 
@@ -276,7 +326,6 @@ Với một số trường hợp có thể sửa response trực tiếp như th�
 Chúng ta có thể sử dụng Spring security project, tuy nhiên để đơn giản chúng ta có thể tự tạo cơ chế authentication và authorization cho riêng mình. 
 
 Xét ví dụ demo sử dụng một Filter để parse JwtToken [JWTFilter](./my-spring-app/src/main/java/my_group/web/filter/JWTFilter.java). Từ đó dùng Jwt token để authentication.
-
 
 # References
 - https://www.baeldung.com/spring-mvc-handlerinterceptor-vs-filter

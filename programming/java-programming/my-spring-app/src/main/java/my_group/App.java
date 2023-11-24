@@ -37,7 +37,7 @@ public class App
     static JWTService jwtService;
 
     public static void main( String[] args ) throws Exception {
-        jwtService = new JWTService(generateKey());
+        jwtService = new JWTService(KeyPairGenerator.getInstance("Ed25519").generateKeyPair());
         AnnotationConfigWebApplicationContext ctx = getWebApplicationContext();
         // Create and register the DispatcherServlet
         // It automatically calls ctx.refresh() properly, don't call it manually
@@ -85,11 +85,6 @@ public class App
         MutablePropertySources propertySources = ctx.getEnvironment().getPropertySources();
         propertySources.addLast(propertySource);
         return ctx;
-    }
-
-    public static KeyPair generateKey() throws NoSuchAlgorithmException {
-        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("Ed25519");
-        return keyPairGenerator.generateKeyPair();
     }
 
     @Bean

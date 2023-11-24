@@ -4,8 +4,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
@@ -13,8 +11,6 @@ import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring6.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
-
-import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 public class WebConfig extends DelegatingWebMvcConfiguration {
@@ -25,13 +21,6 @@ public class WebConfig extends DelegatingWebMvcConfiguration {
         this.applicationContext = applicationContext;
     }
 
-//    @Bean
-//    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-//        http.authorizeHttpRequests((requests) -> requests.anyRequest().authenticated());
-//        http.formLogin(withDefaults());
-//        http.httpBasic(withDefaults());
-//        return http.build();
-//    }
 
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {

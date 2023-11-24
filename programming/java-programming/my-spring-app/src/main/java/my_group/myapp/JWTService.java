@@ -6,7 +6,6 @@ import org.apache.logging.log4j.Logger;
 
 import java.security.KeyPair;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.Optional;
 

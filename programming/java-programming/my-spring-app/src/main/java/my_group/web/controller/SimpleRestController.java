@@ -11,4 +11,9 @@ public class SimpleRestController {
     public Book getBook() {
         return new Book("My book", "anonymous", 2023);
     }
+
+    @PostMapping
+    public Book createBook(@RequestBody Book book) {
+        return book;
+    }
 }

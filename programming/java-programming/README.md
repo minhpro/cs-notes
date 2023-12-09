@@ -1,5 +1,9 @@
 ## Java Programming List
 
+- Specification
+  - https://docs.oracle.com/javase/specs/index.html
+- Tutorial
+  - https://docs.oracle.com/javase/tutorial/tutorialLearningPaths.html
 - Project Tools
   - [Maven](maven.md)
   - Gradle
@@ -38,3 +42,18 @@
   - JOOQ
 - Security
   - https://github.com/jwtk/jjwt#example-jws-eddsa
+- Functional
+  - https://www.vavr.io/
+- Validation
+  - https://hibernate.org/validator/
+  - https://docs.vavr.io/#_validation
+  - https://commons.apache.org/proper/commons-lang/apidocs/org/apache/commons/lang3/Validate.html
+- API documentation
+  - https://www.baeldung.com/spring-rest-openapi-documentation
+  - https://springdoc.org/
+
+
+## Reading
+
+- Java The Complete References - Herbert Schildt
+- Java Concurrency in Practice

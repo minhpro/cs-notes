@@ -22,9 +22,3 @@ https://roadmap.sh
 https://roadmap.sh/computer-science
 
 https://www.coursicle.com/cornell/courses/CS/
-
-## Tools
-
-- Source Version Control
-  - Mercurial: https://book.mercurial-scm.org/
-  - Git

@@ -13,6 +13,9 @@ Editor
 - Lapce: https://github.com/lapce/lapce
 - Amp: https://github.com/jmacdonald/amp 
 - Zee: https://github.com/zee-editor/zee (Emacs inspired)
+- Emacs https://www.youtube.com/watch?v=gu3mFS_HX7w
+  - https://www.youtube.com/watch?v=48JlgiBpw_I
+  - https://www.youtube.com/watch?v=lkIicfzPBys
 
 Source Version Control
   - Mercurial: https://book.mercurial-scm.org/

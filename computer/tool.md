@@ -1,0 +1,17 @@
+- VLC: https://github.com/videolan/vlc
+- ShareX: https://github.com/ShareX/ShareX
+  -  capture or record any area of your screen and share it
+- https://github.com/obsproject/obs-studio
+  - video recording and live streami
+- https://github.com/rocksdanister/lively
+  - animated desktop wallpapers and screensavers powered by WinUI 3
+- Rise Media Player
+- GIMP — Free Alternative to Adobe Photoshop
+- https://github.com/audacity/audacity
+  - Audio Editor
+- Shotcut — Free Alternative to Adobe Premiere Pro
+- LibreOffice — Free Alternative to Microsoft Office
+- Blender — Free Alternative to Autodesk Maya and Cinema 4D
+- Okular — Free Alternative to Paid PDF Editors
+- Krita — Free Alternative to Adobe Illustrator and Adobe Animate
+- FreeCAD — Free Alternative to AutoCAD

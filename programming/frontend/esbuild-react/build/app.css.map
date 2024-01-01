@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/style/app.module.css", "../src/style/test.css"],
+  "sourcesContent": [".redClass {\n  color: aquamarine;\n}", ".test_class {\n  text-align: center;\n  color: antiquewhite;\n}\n\nh1 {\n  color: aqua!important;\n}\n\nh1 {\n  color: blue!important;\n}"],
+  "mappings": ";AAAA,CAACA;AACC,SAAO;AACT;;;ACFA,CAAC;AACC,cAAY;AACZ,SAAO;AACT;AAEA;AACE,SAAO;AACT;AAEA;AACE,SAAO;AACT;",
+  "names": ["redClass"]
+}

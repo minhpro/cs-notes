@@ -1,0 +1,17 @@
+/* src/style/app.module.css */
+.app_redClass {
+  color: aquamarine;
+}
+
+/* src/style/test.css */
+.test_class {
+  text-align: center;
+  color: antiquewhite;
+}
+h1 {
+  color: aqua !important;
+}
+h1 {
+  color: blue !important;
+}
+/*# sourceMappingURL=app.css.map */

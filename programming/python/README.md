@@ -9,6 +9,7 @@
 - Web
   - https://github.com/Neoteroi/BlackSheep
   - https://github.com/sanic-org/sanic
+  - https://www.youtube.com/watch?v=_2nF4e7FN9Y&list=PL3kg5TcOuFlp9x-MJO-sN9ucMUdjrDSOL
 - Async
   - https://github.com/magicstack/uvloop
   - https://github.com/python-trio/trio

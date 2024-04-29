@@ -1,0 +1,21 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: LStation OpenAPI
+  description: LStation CNA OpenAPI Specification.
+servers:
+  - url: http://127.0.0.1:8080
+tags:
+  - name: pets
+paths:
+  /pets:
+    $ref: "./resources/pets.yaml"
+  /pets/{petId}:
+    $ref: "./resources/pet.yaml"
+components:
+  parameters:
+    $ref: "./parameters/_index.yaml"
+  schemas:
+    $ref: "./schemas/_index.yaml"
+  responses:
+    $ref: "./responses/_index.yaml"

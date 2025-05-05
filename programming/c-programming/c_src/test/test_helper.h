@@ -1,0 +1,1 @@
+#define test_assert(expr) if(!(expr)){ fprintf(stderr, "\t[assertion failed] %s: %s\n", __PRETTY_FUNCTION__,__STRING(expr)); return FALSE; }

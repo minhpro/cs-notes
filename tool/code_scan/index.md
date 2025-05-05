@@ -1,0 +1,4 @@
+- https://github.com/SonarSource/sonarqube
+- https://github.com/snyk/cli
+- https://github.com/coverity/coverity-security-library
+- https://github.com/spotbugs/spotbugs

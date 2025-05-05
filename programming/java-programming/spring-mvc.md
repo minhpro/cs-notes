@@ -315,11 +315,11 @@ class DecoratorExample implements OriginalInterface {
 
 Một ví dụ sử dụng khái niệm wrapper (hay decorator) để thêm header vào request: [RequestHeaderWapper](./my-spring-app/src/main/java/my_group/web/filter/RequestHeaderWrapper.java).
 
-Cách dùng wrapper: [example](./my-spring-app/src/main/java/my_group/web/LogFilter.java)
+Cách dùng wrapper: [example](./my-spring-app/src/main/java/my_group/web/filter/LogFilter.java)
 
 ## Filter xử lý response
 
-Với một số trường hợp có thể sửa response trực tiếp như thêm header hay cookie, nếu cần sửa lý được biệt như can thiệp vào body của response thì cần phải có kỹ thuật riêng. Ví dụ tạo một filter để ghi lại response sang một OutputStream khác (như là System.out), chúng ta cần wrap ServletOutputStream và thực hiện cách hàm `write` trên đồng thời của ServletOutputStream và OutputStream của chúng ta. Xem [ví dụ](./my-spring-app/src/main/java/my_group/web/filter/ReflectResponseFilter.java).
+Với một số trường hợp có thể sửa response trực tiếp như thêm header hay cookie, nếu cần xử lý đặc biệt như can thiệp vào body của response thì cần phải có kỹ thuật riêng. Ví dụ tạo một filter để ghi lại response sang một OutputStream khác (như là System.out), chúng ta cần wrap ServletOutputStream và thực hiện cách hàm `write` trên đồng thời của ServletOutputStream và OutputStream của chúng ta. Xem [ví dụ](./my-spring-app/src/main/java/my_group/web/filter/ReflectResponseFilter.java).
 
 # Security
 

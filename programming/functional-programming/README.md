@@ -11,3 +11,15 @@ Contents
   - Scooty
   - Spock
   - Twain
+- Haskell study
+  - https://learnyouahaskell.github.io/chapters.html
+  - https://people.cs.nott.ac.uk/pszgmh/pgp.html
+  - https://people.cs.nott.ac.uk/pszgmh/afp.html
+  - https://github.com/soupi/haskell-study-plan
+  - https://github.com/haskell-beginners-2022/course-plan
+  - https://www.youtube.com/playlist?list=PLe7Ei6viL6jGp1Rfu0dil1JH1SHk9bgDV
+  - https://learn-haskell.blog/
+  - https://hackage.haskell.org/package/stgi
+  - https://gitlab.haskell.org/ghc/ghc/-/wikis/commentary/compiler/generated-code
+  - https://plfa.github.io/Naturals/
+  - https://en.wikibooks.org/wiki/Write_Yourself_a_Scheme_in_48_Hours

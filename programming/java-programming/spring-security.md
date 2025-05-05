@@ -34,3 +34,14 @@ public class SecurityConfig {
 
 }
 ```
+
+## Multiple SecurityFilterChain
+
+https://docs.spring.io/spring-security/reference/servlet/architecture.html#servlet-multi-securityfilterchain-figure
+
+https://www.danvega.dev/blog/multiple-spring-security-configs
+
+
+## Logging
+
+`logging.level.org.springframework.security=TRACE`

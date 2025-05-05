@@ -1,0 +1,2 @@
+- https://www.baeldung.com/hibernate-unsaved-transient-instance-error
+- https://www.baeldung.com/jpa-transient-ignore-field

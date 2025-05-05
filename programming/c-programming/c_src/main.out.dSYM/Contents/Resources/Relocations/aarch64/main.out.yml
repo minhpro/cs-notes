@@ -1,0 +1,22 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/minhnt/Projects/cs-notes/programming/c-programming/c_src/main.out'
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _s_swap, symObjAddr: 0x0, symBinAddr: 0x1000037C8, symSize: 0x50 }
+  - { offsetInCU: 0x33, offset: 0x33, size: 0x8, addend: 0x0, symName: _s_swap, symObjAddr: 0x0, symBinAddr: 0x1000037C8, symSize: 0x50 }
+  - { offsetInCU: 0x81, offset: 0x81, size: 0x8, addend: 0x0, symName: _strcomp, symObjAddr: 0x50, symBinAddr: 0x100003818, symSize: 0x98 }
+  - { offsetInCU: 0x26, offset: 0xF5, size: 0x8, addend: 0x0, symName: _get_line, symObjAddr: 0x0, symBinAddr: 0x1000038B0, symSize: 0xBC }
+  - { offsetInCU: 0x41, offset: 0x110, size: 0x8, addend: 0x0, symName: _get_line, symObjAddr: 0x0, symBinAddr: 0x1000038B0, symSize: 0xBC }
+  - { offsetInCU: 0x85, offset: 0x154, size: 0x8, addend: 0x0, symName: _readlines, symObjAddr: 0xBC, symBinAddr: 0x10000396C, symSize: 0x90 }
+  - { offsetInCU: 0xD7, offset: 0x1A6, size: 0x8, addend: 0x0, symName: _writelines, symObjAddr: 0x14C, symBinAddr: 0x1000039FC, symSize: 0x74 }
+  - { offsetInCU: 0x26, offset: 0x21D, size: 0x8, addend: 0x0, symName: _v_swap, symObjAddr: 0x0, symBinAddr: 0x100003A70, symSize: 0x14 }
+  - { offsetInCU: 0x33, offset: 0x22A, size: 0x8, addend: 0x0, symName: _v_swap, symObjAddr: 0x0, symBinAddr: 0x100003A70, symSize: 0x14 }
+  - { offsetInCU: 0x26, offset: 0x283, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100003A84, symSize: 0x19C }
+  - { offsetInCU: 0x41, offset: 0x29E, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100003A84, symSize: 0x19C }
+  - { offsetInCU: 0x26, offset: 0x359, size: 0x8, addend: 0x0, symName: _swap, symObjAddr: 0x0, symBinAddr: 0x100003C20, symSize: 0x50 }
+  - { offsetInCU: 0x33, offset: 0x366, size: 0x8, addend: 0x0, symName: _swap, symObjAddr: 0x0, symBinAddr: 0x100003C20, symSize: 0x50 }
+  - { offsetInCU: 0x81, offset: 0x3B4, size: 0x8, addend: 0x0, symName: _partition, symObjAddr: 0x50, symBinAddr: 0x100003C70, symSize: 0xD4 }
+  - { offsetInCU: 0xEF, offset: 0x422, size: 0x8, addend: 0x0, symName: _s_partition, symObjAddr: 0x124, symBinAddr: 0x100003D44, symSize: 0xD8 }
+  - { offsetInCU: 0x15D, offset: 0x490, size: 0x8, addend: 0x0, symName: _qsort, symObjAddr: 0x1FC, symBinAddr: 0x100003E1C, symSize: 0x7C }
+  - { offsetInCU: 0x1B9, offset: 0x4EC, size: 0x8, addend: 0x0, symName: _s_qsort, symObjAddr: 0x278, symBinAddr: 0x100003E98, symSize: 0x7C }
+...

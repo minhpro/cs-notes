@@ -1,0 +1,5 @@
+- https://vale.dev/
+- https://git.sr.ht/~sircmpwn/hare
+- https://drewdevault.com/2022/10/03/Does-Rust-belong-in-Linux.html
+- https://gleam.run/documentation/
+- https://arsdnet.net/

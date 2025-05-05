@@ -6,3 +6,5 @@
   - Minijinja: template engine
   - Tokio: async tool, lib, etc
   - Serde: JSON
+  - https://github.com/JoeyMckenzie/realworld-rust-axum-sqlx
+  

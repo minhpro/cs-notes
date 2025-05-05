@@ -312,6 +312,7 @@ And then query again to see what different?
 **References**:
 
 * https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-usagenotes-known-issues-limitations.html
+* https://dev.mysql.com/doc/connector-j/en/connector-j-usagenotes-known-issues-limitations.html
 * https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-time-instants.html
 * https://dev.mysql.com/doc/refman/8.0/en/date-and-time-literals.html
 * https://dev.mysql.com/doc/refman/8.0/en/datetime.html

@@ -6,6 +6,8 @@ Shell tools
 - Starship (cross shell prompt): https://github.com/starship/starship
 
 Editor
+- https://c9x.me/edit/
+  - https://c9x.me/git/ed.git/tree/
 - Helix: https://github.com/helix-editor/helix
 - Micro: https://github.com/zyedidia/micro
 - Kilo: https://github.com/antirez/kilo (learning purpose)
@@ -20,3 +22,31 @@ Editor
 Source Version Control
   - Mercurial: https://book.mercurial-scm.org/
   - Git
+
+PDF convert
+- https://github.com/btbytes/pol
+
+Doc Converter 
+- https://github.com/sphinx-doc/sphinx
+- [Pandoc](pandoc.md)
+
+Static site generator:
+- https://github.com/gohugoio/hugo
+
+
+Youtube download
+- https://github.com/yt-dlp/yt-dlp
+
+Typeset:
+- Tex/Latex
+- https://github.com/typst/typst
+  - https://github.com/skyzh/chicv?tab=readme-ov-file
+  - 
+
+https://github.com/shubhamgrg04/awesome-diagramming
+
+
+Modeling:
+- https://github.com/FreeCAD/FreeCAD
+- https://github.com/huxingyi/dust3d
+- https://github.com/blender/blender
